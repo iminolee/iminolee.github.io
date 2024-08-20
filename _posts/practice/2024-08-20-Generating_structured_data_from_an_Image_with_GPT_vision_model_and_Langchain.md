@@ -3,7 +3,6 @@ layout: post
 title: "Generating structured data from an image with GPT-vision model and LangChain"
 date: 2024-08-20 22:00:00 +0900
 last_modified_at: 2024-08-21 02:00:00 +0900
-author: iminolee
 categories: [practice]
 tags: [LLM, LangChain]
 toc: true
