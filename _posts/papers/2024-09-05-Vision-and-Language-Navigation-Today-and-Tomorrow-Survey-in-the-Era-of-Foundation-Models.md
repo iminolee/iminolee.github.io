@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Vision-and-Language Navigation Today and Tomorrow: A Survey in the Era of Foundation Models"
-date: 2024-09-05 22:00:00 +0900
-last_modified_at: 2024-09-05 23:00:00 +0900
+date: 2024-09-05 23:00:00 +0900
 categories: [papers]
 tags: [VLN, Survey]
 toc: true
