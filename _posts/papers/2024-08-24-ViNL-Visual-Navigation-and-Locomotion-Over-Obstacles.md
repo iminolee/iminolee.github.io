@@ -2,7 +2,7 @@
 layout: post
 title: "ViNL: Visual Navigation and Locomotion Over Obstacles"
 date: 2024-08-24 22:00:00 +0900
-last_modified: 2024-08-30 09:00:00 +0900
+last_modified_at: 2024-08-30 09:00:00 +0900
 categories: [papers]
 tags: [RL, Locomotion, Navigation]
 toc: true
