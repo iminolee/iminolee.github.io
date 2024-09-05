@@ -1,0 +1,147 @@
+---
+layout: post
+title: "Vision-and-Language Navigation Today and Tomorrow: A Survey in the Era of Foundation Models"
+date: 2024-09-05 22:00:00 +0900
+last_modified_at: 2024-09-05 23:00:00 +0900
+categories: [papers]
+tags: [VLN, Survey]
+toc: true
+comments: true
+published: true
+---
+
+> Zhang, Yue, et al. "Vision-and-Language Navigation Today and Tomorrow: A Survey in the Era of Foundation Models." arXiv preprint arXiv:2407.07035 (2024). [[Paper]](https://arxiv.org/pdf/2407.07035)
+
+## Abstract 
+*Vision-and-Language Navigation*(VLN) 분야는 최근 몇 년 동안 점점 더 많은 주목을 받으며, 이 분야를 발전시키기 위한 다양한 접근법들이 제안되고 있다. Foundation Models의 등장은 VLN 연구의 challenge와 proposed methods에 큰 영향을 미쳤다. 이 서베이 논문은 VLN 연구의 현재의 방법론과 미래의 기회를 다루면서, VLN 문제를 해결하기 위해 Foundation Models를 활용하는 방법과 잠재적인 역할에 대한 포괄적인 리뷰를 다루고 있다.
+
+## 1. Introduction
+인간과 환경에 상호작용할 수 있는 *Embodied Intelligence*를 갖춘 에이전트를 개발하는 것은 로봇공학과 인공지능 분야에서의 오랜 목표 중 하나입니다. 이러한 시스템은 일상 생활에서 가정용 로봇, 자율주행 자동차, 개인 비서 등 다기능 보조 도구로서 실질적인 응용 가능성을 가지고 있습니다.
+
+이러한 연구를 발전시키기 위한 하나의 문제 설정 중 하나는 *Vision-and-Language Navigation* [(Anderson et al., 2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html)이다. 이는 에이전트가 인간의 지시를 따르고, 다양한 형태의 ambiguity가 존재하는 3D 환경을 탐색하며 상황에 맞는 소통을 요구하는 멀티모달 및 협력 작업이다. 수년 동안 VLN은 **Photorealistic Simulators**([Matterport3D](https://arxiv.org/abs/1709.06158); [Habitat](https://openaccess.thecvf.com/content_ICCV_2019/html/Savva_Habitat_A_Platform_for_Embodied_AI_Research_ICCV_2019_paper.html); [Gibson](https://openaccess.thecvf.com/content_cvpr_2018/html/Xia_Gibson_Env_Real-World_CVPR_2018_paper.html))와 **Real Environments** 모두에서 연구되어 왔으며, 각각 약간 다른 문제 공식화를 제시하는 여러 벤치마크를 도출하였다.
+
+최근에는 BERT(Bidirectional Encoder Representations from Transformers, 2019)와 같은 사전 훈련 모델부터 현대적인 LLMs(Large Language Models) 및 VLMs(Vision Language Models)에 이르기까지, 파운데이션 모델은 멀티모달의 이해와 추론 및 도메인 간 일반화에서 뛰어난 능력을 보여줍니다. 이러한 모델은 텍스트, 이미지, 오디오 및 비디오와 같은 방대한 데이터를 사전 훈련하며 *Embodied AI* 작업을 포함한 다양한 특정 응용 시스템에 적응할 수 있다. [(Xu et al., 2024)](https://arxiv.org/abs/2402.02385)
+이러한 파운데이션 모델을 VLN 작업에 통합하는 것은 *Embodied AI* 연구의 최근  발전을 나타내며, 성능 향상에도 중요한 기여를 했다. ([HAMT](https://proceedings.neurips.cc/paper/2021/hash/2e5c2cb8d13e8fba78d95211440ba326-Abstract.html); [ScaleVLN](https://openaccess.thecvf.com/content/ICCV2023/html/Wang_Scaling_Data_Generation_in_Vision-and-Language_Navigation_ICCV_2023_paper.html); [NavGPT](https://ojs.aaai.org/index.php/AAAI/article/view/28597)) 또한, 파운데이션 모델은 *Multi-modal Attention Learning*과 *Strategy Policy Learning*에서 일반적인 시각 및 언어 표현의 사전 훈련으로 연구 초점을 확장하고, 따라서 작업 계획과 상식 추론 및 환경에 대한 일반화 등 새로운 기회를 VLN 분야에 가져왔다.
+
+본 서베이 논문이 제시하는 목표는 두 가지이다. 첫째, 이 분야에서 파운데이션 모델의 역할과 기회를 탐구합니다. 둘째, VLN의 다양한 과제와 솔루션을 *Language Model, Agent Model and World Model*의 백본으로서 파운데이션 모델이 역할을 하는 체계적인 LAW 프레임워크[(Hu and Shu, 2023)](https://arxiv.org/abs/2312.05230) 내에서 연구자들에게 조직화하는 것이다.
+
+![Figure1](/assets/img/papers/2024-08-26/Figure1.png){: width="100%" }
+
+구체적으로, 각 내비게이션 단계에서 AI 에이전트는 시각적 환경을 인식하고, 인간으로부터 언어적 지시를 받고, 에이전트 스스로 이해할 수 있는 표현을 바탕으로 계획을 세우고 내비게이션 작업을 효율적으로 수행한다. 이는 **[그림1]** 에 나와 있듯이, *World Model*은 에이전트가 주변의 외부 환경을 이해하고, 자신의 행동이 world state를 어떻게 변화시키는지를 이해하는 추상화이다. 이 모델은 확장된 *Agent Model*의 일부로 *Human Model*도 포함하여 인간의 지시를 해석하고, 이를 통해 에이전트의 목표를 형성한다. 본 서베이에서는 VLN 연구의 발전을 리뷰하고 달성된 이정표를 이해하기 위해, 아래의 세 가지 관점에서 근본적인 도전을 중심으로 내용을 구조화해서 설명하고 있다.
+
+* Learning a *World Model* to represent the visual environment and generalize to unseen ones.
+* Learning a *Human Model* to effectively interpret human intentions from grounded instructions.
+* Learning a VLN agent that leverages its *World and Human Model* to ground language, communicate, reason, and plan, enabling it to navigate environments as instructed.
+
+이 서베이에서는 각 모델에 대해 파운데이션 모델을 기반으로 한 도전 과제, 솔루션 및 미래 방향을 논의하기 위해 **[그림2]** 에서 계층적이고 세분화된 분류를 제시한다. 또한, VLN 연구 분야의 배경 및 관련 연구 노력 뿐만 아니라 가용한 벤치마크에 대한 간략한 개요도 다루고 있다. 그런 다음 제안된 방법이 세 가지 주요 도전 과제인 *World Model*, *Human Model*, *VLN agent*를 어떻게 해결했는지에 중점을 둔다. 마지막으로, 파운데이션 모델의 성장에 비추어 현재의 도전 과제와 미래 연구 기회를 논의하고 있다.
+
+![Figure2](/assets/img/papers/2024-08-26/Figure2.png){: width="100%" }
+
+## 2. Background and Task Formulations
+이 섹션에서는 VLN의 연구 배경과 VLN 문제 정의 및 벤치마크에 대한 간략한 개요를 제공하고 있다.
+
+### 2.1. Cognitive Underpinnings of VLN
+사람과 다른 항법을 수행하는 동물들의 환경을 탐색하기 위한 초기 이해와 전략을 크게 두 가지 기본 메커니즘으로 설명하고 있다. 첫 번째는 파일로팅(piloting)으로 이는 환경의 랜드마크를 사용하여 거리와 각도를 계산하는 것이고, 두 번째는 경로 통합(path integration)으로 self-motion sensing을 통해 변위와 방향 변화를 계산하는 것이다. 공간 항법(spatial navigation)을 이해하는 데 중심이 되는 것은 인지 지도 가설(cognitive map hypothesis)로, 이는 뇌가 메모리를 지원하고 탐색을 안내하기 위해 통합된 공간 표현(spatial representation)을 형성한다는 것을 시사한다. 예를 들어, 쥐가 익숙한 경로가 차단되고 랜드마크가 없을 때 올바른 새로운 경로를 선택하여 움직이는 것과 같다. 또한 최근 연구들은 비유클리드적(non-Euclidean) 표현, 예를 들어 인지 그래프(cognitive graphs)를 제안하며 이는 우리가 world에 대한 공간 지식을 어떻게 표현하는지의 복잡성을 보여준다. 시각적 및 청각적 인식이 공간 표현에 통합되는 동안 우리의 언어적 기술과 공간 인지가 밀접하게 얽히게 되고 이러한 언어적 기술은 공간과 관련된 작업에 도움이 될 수 있음이 연구를 통해 밝혀지고 있다. **결국 VLN을 연구하는 것은 인간의 지시를 따르는 *Embodied AI*의 개발을 향상시킬 뿐만 아니라, 지능형 로봇의 탐색 기술을 개발하고 다양한 환경에 적응하며, 언어 사용이 시각적 인식 및 행동과 어떻게 연결되는지를 더 깊이 이해하는 데 기여할 수 있다고 본 저자는 이야기하고 있다.**
+
+### 2.2. Relevant Tasks and Scope of the Survey
+자연어 탐색 지시(Natural Language Navigation Instructions)를 따르는 것은 전통적으로 지도와 같은 symbolic world representations를 사용하여 모델링되었다. 그러나 본 서베이에서는 visual environments를 사용하고 *multimodal understanding and groundings*의 과제를 다루는 모델에 중점을 두고 있다. 또한, VLN 연구를 다루면서 불가피하게 *navigational tasks*를 넘어선 영역(*mobile manipulation and dialogue*)까지 설명하고 있지만, 주요 초점은 탐색 작업에 있으며 이에 대한 자세한 문헌 검토를 제공하고 있다. 추가적으로 이 서베이에서는 파운데이션 모델의 역할을 활용한 연구 노력을 세 가지 기본 과제로 분류하고 있으며 이와 관련하여 관련된 방법(LSTM 기반 방법 등)에 대해서는 각 섹션의 시작 부분에서 간략히 논의하고 있다.
+
+### 2.3. Task Formulations and Benchmarks VLN Task Definition
+2.3.1. **VLN Task Definition**: 전형적인 VLN 에이전트는 **지정된 위치**에서 사람으로부터 언어적 지시를 수신하며, egocentric한 visual perspective를 사용하여 환경을 탐색한다. 지시를 따름으로써, 에이전트의 작업은 일련의 이산적인 뷰 또는 목적지로 도달하는 저수준의 행동과 제어(e.g., 앞으로 0.25 meter)를 통해 경로를 생성하는 것이다. 이때 에이전트는 목적지에서 지정된 거리 내에 도착하면 성공한 것으로 간주된다. 또한 에이전트는 탐색 중에 사람과 추가적인 정보를 교환할 수 있으며, 도움을 요청하거나 자유 형식의 언어적 소통에 참여가 가능하다. 게다가 VLN 에이전트가 탐색과 함께 조작 및 객체 탐지와 같은 추가 작업을 통합하는 것에 대한 기대가 증가하고 있다.
+
+![Table1](/assets/img/papers/2024-08-26/Table1.png){: width="100%" }
+
+2.3.2. **Benchmarks**: 기존의 VNL 벤치마크는 탐색이 이뤄지는 환경, 인간 상호작용의 유형, VLN 에이전트의 작업 및 행동 공간, 데이터셋 수집 방법 등의 여러 주요 측면을 기반으로 분류할 수 있다. 대표적으로 VLN 연구의 교본이라고 할 수 있는 논문인 [*Vision-and-Language Navigation: Interpreting visually-grounded navigation instructions in real environments.(Anderson et al., CVPR, 2018)*](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html) 에서는 [*Matterport3D Simulator(Chang et al., arXiv, 2017)*](https://arxiv.org/abs/1709.06158)를 기반으로 *Room-to-Room (R2R)* 데이터셋을 생성하여, 에이전트가 세밀한 탐색 지시를 따라 목표에 도달해야 하는 작업을 제시했다. *[Room-across-Room (RxR) (Ku et al., EMNLP, 2020)](https://arxiv.org/abs/2010.07954)* 은 영어, 힌디어 및 텔루구어 지시를 포함한 다국어 변형으로, 더 큰 샘플 크기와 함께 가상의 위치에 대한 time-aligned 지시를 제공한다. *Matterport3D*는 VLN 에이전트가 *discretized environment*에서 작동하고 사전 정의된 *connectivity graphs*를 사용하여 내비게이션을 수행할 수 있도록 하며, 에이전트가 인접 노드 사이를 순간이동하여 그래프를 따라 이동할 수 있다. 이를 _**VLN_DE**_ 라고 한다. 더 현실적인 설정을 위해, [Krantz et al., ECCV, (2020)](https://openreview.net/forum?id=BRjplxPwk1); [Li et al., RAL, (2022c)](https://ieeexplore.ieee.org/abstract/document/9674225/?casa_token=2cWcJ2grOnIAAAAA:Lj1NICqxcD_R5KoDM7hMVlJLohIY5Dr5eBsrWk9ItePI1ivj31jPt82r7zYqbKTj0io3xIm06A); [Irshad et al., ICRA, (2021)](https://ieeexplore.ieee.org/abstract/document/9561806?casa_token=CbovhTReh2wAAAAA:TFJB2z0y31w4IkbmhKTpH0IZFHublJENX2YCXZ9sOE1oEhyXkMpGs1BfYrChho7L_X61wrbwsQ)는 이러한 이산적인 R2R 경로를 연속적인 공간으로 전환하여 VLN을 연속적인 환경(_**VLN_CE**_)에서 제안하였다. 최근에는 이러한 연속적인 행동 공간을 가진 로봇 설정에서 더욱 현실적인 sim-to-real의 격차를 좁히기 위한 VLN 연구가 제안되고 있다.
+
+2.3.3. **Evaluation Metrics**: 세 가지 주요 지표가 *navigation wayfinding performance [(Anderson et al., CVPR, 2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html)* 를 평가하는 데 사용된다.
+
+* **Navigation Error (NE)**: 에이전트의 최종 위치와 목표 목적지 사이의 최단 경로 거리를 평균한 값이다. 이는 에이전트가 목적지에서 얼마나 벗어났는지를 측정하는 지표이다.
+* **Success Rate (SR)**: 최종 위치가 목표 목적지에 충분히 가깝게 도착한 에피소드의 비율을 나타낸다. 일반적으로, 에이전트가 목적지로부터 일정 거리 이내에 도달하면 성공한 것으로 간주되며, *SR*은 이러한 성공 사례의 비율을 의미한다.
+* **Success Rate Weighted Path Length (SPL)**: 성공률을 경로 길이로 정규화한 값입니다. 이 지표는 에이전트가 목표에 도달하는 데 걸린 경로의 효율성을 측정하며, 성공률이 높은 경로일수록 더 짧은 경로를 선호한다.
+
+추가적으로, 지시 수행의 충실도와 예측된 경로와 실제 경로 간의 일치도를 측정하기 위해 아래의 지표가 사용된다.
+
+* **Coverage Weighted by Length Score (CLS)**: 이는 탐색 중 예측된 경로가 실제 경로와 얼마나 일치하는지를 측정하는 지표로, 예측된 경로가 실제 경로와 얼마나 밀접하게 일치하는지를 평가한다.
+* **Normalized Dynamic Time Warping Weighted by Success Rate (nDTW)**: 실제 경로에서 벗어난 정도와 성공률을 모두 고려하여 벌점을 주는 지표이다. 이 지표는 성공 여부를 반영하면서도 실제 경로에서의 편차를 고려하여 보다 정확한 평가를 제공한다. *(Ilharco et al., 2019)*
+
+## 3. World Model: Learning and Representing the Visual Environments
+
+*World Model*은 VLN 에이전트가 주변 환경을 이해하고, 자신의 행동이 world state를 어떻게 변화시키는지 예측하며, 시각적 인식과 언어 지시를 일치시키는 데 도움을 준다. 기존 연구에서 *World Model*을 학습하는 것과 관련하여 두 가지 주요 도전 과제 *(1.현재 에피소드에서 시각적 관찰 기록을 메모리에 인코딩하는 것; 2.새로운 작업에서 보지 못한 환경에 대한 일반화)* 가 강조되었다.
+
+### 3.1. History and Memory
+*Visual Question Answering, VQA* 와 같은 Vision-Language 작업과 달리, VLN 에이전트는 현재 단계에서 이미지를 인식하고 텍스트를 고려하는 것 뿐만 아니라 과거 행동과 관찰의 기록을 포함해야 한다. Foundation Model을 VLN에 활용하기 전에, *LSTM*의 hidden states가 탐색 중 에이전트의 의사결정을 지원하는 implicit memory로 사용되었다. 연구자들은 이러한 기록과 지시 간의 일치를 개선하기 위해 다양한 *attention mechanism ([Tan et al., 2019](https://arxiv.org/abs/1904.04195); [Wang et al., 2019](https://openaccess.thecvf.com/content_CVPR_2019/html/Wang_Reinforced_Cross-Modal_Matching_and_Self-Supervised_Imitation_Learning_for_Vision-Language_Navigation_CVPR_2019_paper.html))* 이나 *auxiliary tasks([Ma et al., 2019](https://arxiv.org/abs/1901.03035)*; *[Zhu et al., 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Zhu_Vision-Language_Navigation_With_Self-Supervised_Auxiliary_Reasoning_Tasks_CVPR_2020_paper.html))* 를 설계하였다.
+
+* **History Encoding**: Foundation Model의 발전에 따라, 많은 연구가 *Transformer architecture* 을 사용하여 탐색 기록을 명시적으로 인코딩하는 VLN 에이전트를 구축하고자 했다. *[Hong et al. (2021)](https://arxiv.org/abs/2011.13922)*은 *Transformer*의 *[CLS]* 토큰 을 반복적으로 사용하여 기록 정보를 인코딩하는 것을 제안하였다.*(CLS token은 NLP 작업에서 Transformer 아키텍처, 특히 BERT와 같은 모델에서 사용되는 특수 토큰으로 입력 시퀀스의 맨 앞에 위치하여 전체 입력 시퀀스를 처리한 후 모델이 입력 시퀀스에 대한 요약 벡터를 출력하는 역할을 함. 이 요약 벡터는 주로 입력 시퀀스의 문맥적 정보를 요약하며 최종 예측이나 분류 작업에 사용됨)* <br>*[Pashevich et al. (2021)](https://openaccess.thecvf.com/content/ICCV2021/html/Pashevich_Episodic_Transformer_for_Vision-and-Language_Navigation_ICCV_2021_paper.html)* 은 *Multi-modal Transformer* 를 사용하여 기록된 관찰을 명시적으로 인코딩하는 방법을 제안하였고, *[Chen et al. (2021b)](https://proceedings.neurips.cc/paper/2021/hash/2e5c2cb8d13e8fba78d95211440ba326-Abstract.html)* 은 각 time step에서 시각적 관찰을 인코딩하는 파노라마 인코더와 모든 과거 관찰을 인코딩하는 기록 인코더를 통해 기록 인코딩을 더욱 개선하였다. 이 설계는 기록 인코딩을 위한 반복 상태의 필요성을 제거하고, 명령-경로 쌍에서 효율적이고 대규모 사전 학습을 가능하게 하였다. 후속 연구들에서는 파노라마 인코더를 *mean pooling of images* 또는 *front-view image encoding* 으로 대체하였다. *[Lin et al. (2022a)](https://arxiv.org/abs/2111.05759)* 은 이전 활성화를 *memory bank* 에 저장하고, *memory bank* 내의 지시와 시간적 맥락 간의 관계를 학습하기 위해 *memory-aware consistency loss* 를 도입한 *variable-length memory framework* 를 제안하였다.
+
+* **Graph-based History**: 
+또 다른 연구는 탐색 기록 모델링을 그래프 정보로 강화하는 것에 중점을 두었다. 예를 들어, 일부 연구는 환경에서 기하학적 단서를 포착하기 위해 구조화된 *Transformer encoder*를 사용하였다. (*[Chen et al., 2022d](https://openaccess.thecvf.com/content/CVPR2022/html/Chen_Think_Global_Act_Local_Dual-Scale_Graph_Transformer_for_Vision-and-Language_Navigation_CVPR_2022_paper.html); [Deng et al., 2020](https://proceedings.neurips.cc/paper/2020/hash/eddb904a6db773755d2857aacadb1cb0-Abstract.html); [Wang et al., 2023b](https://arxiv.org/abs/2305.03602); [Zhou and Mu, 2023](https://ojs.aaai.org/index.php/AAAI/article/view/25494); [Su et al., 2023](); [Zheng et al., 2023](https://arxiv.org/abs/2308.11561); [Wang et al., 2021](https://openaccess.thecvf.com/content/CVPR2021/html/Wang_Structured_Scene_Memory_for_Vision-Language_Navigation_CVPR_2021_paper.html); [Chen et al., 2021a](https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Topological_Planning_With_Transformers_for_Vision-and-Language_Navigation_CVPR_2021_paper.html); [Zhu et al., 2021a](https://openaccess.thecvf.com/content/CVPR2021/html/Zhu_SOON_Scenario_Oriented_Object_Navigation_With_Graph-Based_Exploration_CVPR_2021_paper.html)*). 인코딩에 사용된 *topological graph* 외에도, 많은 연구는 탐색 중 기록된 관찰에 *grid map* (*[Wang et al., 2023e](https://openaccess.thecvf.com/content/ICCV2023/html/Wang_GridMM_Grid_Memory_Map_for_Vision-and-Language_Navigation_ICCV_2023_paper.html); [Liu et al., 2023a](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Birds-Eye-View_Scene_Graph_for_Vision-Language_Navigation_ICCV_2023_paper.html)*), *semantic map* (*[Hong et al., 2023a](https://openaccess.thecvf.com/content/ICCV2023/html/Hong_Learning_Navigational_Visual_Representations_with_Semantic_Map_Supervision_ICCV_2023_paper.html); [Huang et al., 2023](https://ieeexplore.ieee.org/abstract/document/10160969); [Georgakis et al., 2022](https://openaccess.thecvf.com/content/CVPR2022/html/Georgakis_Cross-Modal_Map_Learning_for_Vision_and_Language_Navigation_CVPR_2022_paper.html); [Anderson et al., 2019](https://proceedings.neurips.cc/paper/2019/hash/82161242827b703e6acf9c726942a1e4-Abstract.html); [Chen et al., 2022b](https://proceedings.neurips.cc/paper_files/paper/2022/hash/f959b05dd74ba8a735276c3df4ae8b71-Abstract-Conference.html); [Irshad et al., 2022](https://ieeexplore.ieee.org/abstract/document/9956561)*), *local metrics map* (*[An et al., 2023](https://arxiv.org/abs/2212.04385)*) 과 *local neighborhood map* (*[Gopinathan et al., 2023](https://arxiv.org/abs/2309.05036)*) 과 같은 정보를 포함하도록 제안하였다.
+
+### 3.2. Generalization across Environments
+VLN 연구의 주요 과제 중 하나는 제한된 환경에서 학습하고, 미지의 환경에서 일반화하는 것이다. 많은 연구들은 *semantic segmentation features*로부터의 학습, 학습 중 환경에 대한 일부 정보를 의도적으로 *dropout* 하여 더 강건한 표현을 학습하는 전략, 그리고 다양한 환경에서 *similarity between semantically-aligned image pairs*를 최대화하는 방법 등이 보지 못한 환경에서 에이전트의 일반화 성능을 향상시킴을 입증하였다. 이러한 관찰은 대규모 환경 데이터에서 학습하여 training environment에 overfitting하지 않도록 할 필요성을 제기한다. 다음으로, **기존 연구들이 새로운 환경 데이터를 수집하고 이를 학습에 활용하는 방법**을 논의한다.
+
+* **Pre-trained Visual Representations**: 대부분의 연구에서는 *ImageNet*에서 사전 학습된 *ResNet*을 사용하여 시각적 표현을 획득하여 사용한다. (*[Anderson et al., 2018](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html); [Tan et al., 2019](https://arxiv.org/abs/1904.04195)*) 이를 *[Shen et al. (2021)]()* 은 *CLIP visual encoder*로 대체했으며, 이 인코더는 이미지-텍스트 쌍 간의 contrastive loss로 사전 학습되어 지시와 자연스럽게 정렬되어 있어, VLN의 성능을 향상시킨다. *[Wang et al. (2022b)](https://arxiv.org/abs/2212.03191)* 은 비디오 데이터에서 학습된 시각적 표현을 VLN 작업에 전이하는 방법을 추가로 탐구했으며, 비디오에서 학습된 *temporal information*가 탐색에 중요한 역할을 할 수 있음을 확인하였다.
+
+* **Environment Augmentation**: 환경 증강과 관련된 연구는 자동으로 생성된 합성 데이터를 사용하여 탐색 환경을 증강하는 데 중점을 두고 있다. *EnvEdit, EnvMix, KED, FDA* 는 *Matterport3D* 에서 기존 환경을 변경하여 합성 데이터를 생성하였다. 이들은 다양한 환경에서 방을 섞고, 환경의 외형과 스타일을 변경하며, high-frequency features를 환경의 텍스처에 보간한다. 또 다른 연구, *Pathdreamer* 와 *SE3DS*에서는 현재 관찰을 기반으로 향후 환경을 합성하고 합성된 뷰를 VLN 학습을 위한 증강 데이터로 활용하였다. 
+<br><br>
+이러한 접근 방식들과 달리, 다른 연구들은 VLN 학습을 위한 새로운 도메인의 환경을 도입하였다. *AirBert*는 Airbnb의 단일 이미지를 탐색 경로의 파노라마 관찰로 전환하는 파이프라인을 도입하였다. 유사하게 *Lily*는 비디오와 비디오의 프레임에서 샘플 경로를 증강 데이터로 도입한다. 여전히 Airbnb 이미지, 유튜브 비디오와 실제 탐색 환경 사이에는 도메인 간의 격차가 존재하지만, *ScaleVLN, HM3DAutoVLN, MARVAL* 등은 un-annotated된 *[HM3D (Ramakrishnan et al., 2021)](https://arxiv.org/abs/2109.08238)* 및 *[Gibson (Xia et al., 2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Xia_Gibson_Env_Real-World_CVPR_2018_paper.html)* 환경에서 경로와 지시 쌍을 수집하였다. 이러한 환경에서 수집된 데이터로 세밀하게 조정된 에이전트는 명확히 지정되지 않은 지시와 긴 지시, 그리고 단계별 지시를 받을 때 강력한 일반화 성능을 보인다. *PanoGen* 은 텍스트를 기반으로 새로운 파노라마 환경을 합성하는 방법을 탐구하며, 기존의 3D 시뮬레이션 환경 없이 대규모 파노라마 환경을 수집할 가능성을 보여준다.
+<br><br>
+수집된 환경에서의 학습 패러다임은 파운데이션 모델의 발전과 함께 변화해 왔다. 파운데이션 모델에서 *pre-training* 이 널리 사용되기 이전에는, 대부분의 연구들이 VLN *fine-tuning* 과정에서 자동으로 수집된 새로운 환경을 학습 환경에 직접 증강했다. 그러나 파운데이션 모델에서 *pre-training*이 중요한 역할을 한다는 것이 입증되면서, VLN에서 수집된 환경 데이터를 *pre-training* 단계에서 학습하는 것이 표준이 되었다. 이러한 증강된 도메인 내 데이터로 대규모 사전 학습을 하는 것은 에이전트와 인간 간의 성능 격차를 좁히는 데 중요한 역할을 하고 있다.
+
+## 4. Human Model: Interpreting and Communicating with Humans
+환경을 학습하고 모델링하는 것 외에도, VLN 에이전트는 상황에 맞게 인간이 제공한 자연어 지시를 이해하여 탐색 작업을 완료할 수 있는 *Human Model*이 필요하다. 여기에는 두 가지 주요 과제가 있다: **모호성 해결(Resolving ambiguity)** 과 **다양한 시각적 환경에서 상황에 맞는 지시의 일반화(Generalization of grounded instructions in different visual environments)**
+
+### 4.1. Ambiguous Instructions
+모호한 지시는 주로 single-turn 탐색 시나리오에서 발생한다. 이 경우 에이전트는 추가적인 인간 상호작용 없이 초기 지시를 따라야 한다. 이러한 지시에는 언어 이해와 시각적 인식을 동적으로 환경에 맞추어 조정하는 유연성이 부족하다. 예를 들어, 초기 지시에 현재 시야에서 보이지 않는 랜드마크나 여러 시야에서 볼 수 있는 구별되지 않는 랜드마크가 포함될 수 있는 문제를 생각해볼 수 있다. 파운데이션 모델이 VLN에 적용되기 전까지는 모호한 지시 에 대한 문제는 거의 다뤄지지 않았다. *LEO (Xia et al., 2020)* 의 연구에서 동일한 경로를 여러 관점에서 설명하기 위해 여러 지시를 집계하려고 시도했지만, 여전히 human-annotated instructions에 의존해왔다. 그러나, **파운데이션 모델의 포괄적인 perceptual context와 commonsense knowledge**은 에이전트가 외부 지식을 사용하여 모호한 지시를 해석하고 다른 *human model*로부터 도움을 요청할 수 있도록 했다.
+
+* **Perceptual Context and Commonsense Knowledge**: Large-scale cross-modal 사전 학습 모델인 *CLIP*과 같은 모델은 시각적 의미와 텍스트를 일치시킬 수 있다. 이를 통해 VLN 에이전트는 현재 지각에서 시각적 객체와 그 상태에 대한 정보를 활용하여 모호성을 해결할 수 있다. 특히, single-turn 탐색 시나리오에서는 *CLIP*에서 얻은 가시적이고 구별 가능한 객체로 쉽게 따를 수 있는 **하위 지시를 구성**하고, 원래의 모호한 지시를 쉽게 이해할 수 있는 하위 지시 표현으로 변환하는 *Translator*를 사전 학습한다. *[LANA+ (Wang et al., 2023d)](https://ieeexplore.ieee.org/abstract/document/10359152?casa_token=2IW0Zypqe7IAAAAA:6BT9U7cUGPPJo1yHucYPaSVQK3fFvVJeTnrUx1BgbUVg7tkxMk0Rvq71eiMC4lYBTpw1w137hA)* 는 *CLIP* 모델을 활용하여 시각적 파노라마 관찰과 함께 랜드마크의 semantic tag의 텍스트 목록을 쿼리하고, top-ranked의 검색된 텍스트적 단서를 따라야 할 랜드마크의 표현으로 선택한다. *[NavHint (Zhang et al., 2024b)](https://arxiv.org/abs/2402.02559)* 는 VLN 에이전트가 지시에서 언급된 객체에만 집중하는 대신 시각적 환경을 포괄적으로 이해할 수 있도록 **힌트 데이터셋**을 구성한다. 한편, LLM의 상식적 추론 능력은 모호한 랜드마크를 명확히 하거나 수정하고, 지시를 실행 가능한 항목으로 나눌 수 있다. 예를 들어, *[Lin et al. (2024b)](https://ieeexplore.ieee.org/abstract/document/10543121?casa_token=IntX83ulSY0AAAAA:2q9-Six5ze_xsB0NFbni4A0zVsk1eXBGy8Np1M4YDYS-iR0T5NLf2yzdY6mh3UMdZ7gcUn3hvw)* 는 LLM을 사용하여 open-world 랜드마크의 공동 출현에 대한 상식을 제공(예를 들어, 거실에는 소파가 있을 가능성이 높다 등)하고, *CLIP* 주도의 랜드마크 발견을 수행한다. *[SayCan (Ahn et al., 2022)](https://arxiv.org/abs/2204.01691)* 은 지시를 사전 정의된 허용 가능한 행동의 순위 목록으로 분해하고, 현재 장면에 등장하는 객체에 더 높은 가중치를 부여하는 *affordance function*와 결합한다.
+
+* **Information Seeking**: 모호한 지시는 시각적 지각과 상황적 맥락을 기반으로 해결할 수 있지만, 또 다른 직접적인 접근법은 지시를 생성한 *communication partner*로부터 도움을 구하는 것이다. 이 연구 라인에서는 세 가지 주요 도전 과제가 있다: *(1) 언제 도움을 요청할지 결정하는 것; (2) 다음 행동, 객체 및 방향과 같은 정보 탐색 질문을 생성하는 것; (3) 요청한 정보를 제공하는 oracle(신뢰 가능한 답변 및 정보 제공 시스템이나 지식 기반 모델) 개발*
+<br><br>
+이 프레임워크 안에서 LLM과 VLM은 **정보 탐색 모델** 또는 **정보 제공 모델**의 두 가지 역할을 수행할 수 있다. *Fan et al. (2023b)* 는 GPT-3 모델을 사용하여 학습 데이터에서 정답을 단계별로 처리하고, 사전 훈련된 *SwinBert* 비디오-언어 모델을 사용하여 oracle을 학습시켰다. 또한, *mPLUG-Owl*과 같은 대규모 비전-언어 모델은 강력한 제로샷 oracle로 작동할 수 있음을 입증했다. 더 나아가, self-motivated communication agents는 oracle의 신뢰도를 학습하여 긍정적인 답변을 제공하고, oracle 없이도 self-Q&A 방식의 추론이 가능함을 보였다.
+
+### 4.2. Generalization of Grounded Instructions
+탐색 데이터의 제한된 규모와 다양성은 VLN 에이전트가 다양한 언어 표현을 이해하고 지시를 효과적으로 따를 수 있는 능력에 큰 영향을 미친다. 특히 언어 스타일 자체는 에이전트가 이미 학습한 환경과 학습하지 않은 환경에서 잘 일반화될 수 있지만 *(Zhang et al., 2020)*, 새로운 환경에서 지시를 따르는 것은 제한된 학습 데이터로 인해 어려울 수 있다. 파운데이션 모델은 **사전 학습된 표현**과 **데이터 증강**을 위한 지시 생성이라는 두 가지 방법을 통해 이러한 문제를 해결할 수 있다.
+
+* **Pre-trained Text Representations**: 파운데이션 모델이 도입되기 전에는 많은 연구에서 *LSTM*과 같은 텍스트 인코더를 사용하여 텍스트 지시를 표현하였다. 최근 연구에서는 *PRESS* 와 *BERT* 같은 사전 학습된 언어 모델을 활용하여 에이전트가 새로운 지시를 더 잘 이해할 수 있는 텍스트 표현으로 변환하고 이를 통해 VLN 에이전트의 언어 일반화 능력을 크게 향상시켰다. 또한, *VLN-BERT* , *PREVALENT*와 같은 멀티모달 트랜스포머는 대규모 텍스트-이미지 쌍을 사전 학습하여 VLN 작업에서 성능 향상을 이끌어냈다.
+
+* **Instruction Synthesis**: 에이전트의 일반화 능력을 높이는 또 다른 방법은 새로운 지시를 합성하는 것이다. 초기 연구들은 *Speaker-Follower* 프레임워크를 바탕으로 human-annotated된 지시-경로 쌍을 사용하여 *offline speaker*(지시 생성기) 학습하고 이를 통해 주어진 경로에 대한 새로운 지시를 생성하는 방법을 활용하였다. 그러나 이렇게 생성된 지시의 품질은 인간이 직접 생성하는 지시보다 떨어진다는 문제가 있다. 이를 해결하기 위해 *multilingual T5* 모델의 멀티모달 확장을 통해 텍스트에 맞춰진 시각적 랜드마크 대응 관계를 포함시켜, unseen environments에서 R2R-style 경로에 대해 거의 인간 수준의 지시 품질을 달성하였다. 최근 연구에서는 지시 생성기를 학습하는 대신, **크로스모달 트랜스포머**를 사용하여 자동으로 지시를 생성한다. 예를 들어, *ProbEs*에서는 경로를 샘플링하여 환경을 자율적으로 탐색하고, *CLIP* 모델을 통해 탐지된 동작과 객체 문구로 지시 템플릿을 자동으로 채워 대응하는 지시를 구성하는 방식을 제안하고 있다. 
+
+## 5. VLN Agent: Learning an Embodied Agent for Reasoning and Planning
+*World Model*과 *Human Model*이 시각 및 언어 이해 능력을 강화하는 동안, VLN 에이전트는 의사결정을 하기 위한 **Embodied Reasoning 및 Planning** 능력을 갖춰야 한다. 이러한 관점에서 본 섹션에서는 두 가지 주요한 도전 과제인 **Grounding and Reasoning, and Planning**에 대해 논의한다. 또한, 파운데이션 모델을 VLN 에이전트의 백보능로 직접 적용하는 방법을 탐구한다.
+
+### 5.1. Grounding and Reasoning
+VQA(Visual Question Answering)나 이미지 캡셔닝과 같은 다른 주로 이미지와 해당 텍스트 설명 간의 정적 정렬에 초점을 맞추는 비전-언어 작업들과 달리, VLN 에이전트는 지시사항과 환경 내에서 시공간적 역학(spatial and temporal dynamics)을 추론할 필요가 있다. 구체적으로, 에이전트는 이전의 행동을 고려하고, 수행할 하위 지시의 부분을 식별하며, 텍스트를 시각적 환경에 연결하여 적절한 행동을 수행해야 한다. 이전 방법들은 주로 명시적 의미 모델링이나 보조 작업 설계에 의존하여 이러한 능력을 얻으려고 하였다. 하지만, 파운데이션 모델의 등장과 함께 도메인에 특화된 사전 학습을 하는 것이 주요 접근 방식이 되었다.
+
+* **Explicit Semantic Grounding**: 이전 연구들은 시각 및 언어 모달리티 모두에서 명시적인 의미 모델링을 통해 에이전트의 grounding ability를 향상시켰다. 여기에는 동작과 랜드마크를 모델링하는 것, 지시 내의 구문 정보를 활용하는 것, 그리고 공간적 관계를 모델링하는 것이 포함된다. 그러나 파운데이션 모델을 사용한 VLN 에이전트에서 *explicit grounding*을 탐구한 연구는 매우 적었다. *[Lin et al.(2023a)](https://ojs.aaai.org/index.php/AAAI/article/view/25243)* 는 *actional atomic-concept learning*을 통해 시각적 관찰을 이 행동적 원자 개념과 매핑하여 멀티모달 정렬을 촉진하는 방법을 제안하였다.
+
+* **Pre-training VLN Foundation Models**: 명시적 의미 모델링 외에도, 이전 연구들은 보조 추론 작업(auxiliary reasoning tasks)을 통해 에이전트의 grounding ability를 강화하는 방법을 제안했다. 그러나 이러한 방법들은 파운데이션 모델을 사용하는 VLN 에이전트에서는 많이 연구되지 않았다. 이는 파운데이션 모델의 사전 학습이 이미 탐색 전에 시공간적 의미에 대한 일반적인 이해를 제공하기 때문이다. 이러한 이유로, 최근에는 에이전트의 grounding ability를 더욱 향상시키기 위해 특별히 설계된 다양한 사전 학습 방법들이 제안되었다.
+
+### 5.2. Planning
+동적 계획(Dynamic Planning)은 VLN 에이전트가 환경 변화에 적응하고 실시간으로 탐색 전략을 개선할 수 있게 한다. VLN 작업에서 동적 계획은 크게 두 가지 방식으로 적용된다. 첫 번째는 global graph 정보를 활용하여 local action spaces를 확장하는 **Graph-based planners**이고, 다른 하나는 파운데이션 모델(특히 LLM)의 도입으로 등장한 **LLM-based planners**이다. 이러한 LLM 기반 planner들은 LLM의 방대한 상식적 지식과 고급 추론 능력을 활용해 동적 계획을 수립하며, 이를 통해 더 나은 의사결정을 가능하게 한다.
+
+* **Graph-based Planner**: 최근 VLN 연구에서는 글로벌 그래프 정보를 통해 탐색 에이전트의 계획 능력을 강화하는 데 중점을 두고 있다. *[Wang et al., (2021)](https://openaccess.thecvf.com/content/CVPR2021/html/Wang_Structured_Scene_Memory_for_Vision-Language_Navigation_CVPR_2021_paper.html), [Chen et al., (2022d)](https://openaccess.thecvf.com/content/CVPR2022/html/Chen_Think_Global_Act_Local_Dual-Scale_Graph_Transformer_for_Vision-and-Language_Navigation_CVPR_2022_paper.html), [Zheng et al., (2023)](https://link.springer.com/content/pdf/10.1007/s11263-024-02159-8.pdf)* 등의 연구는 방문한 노드들의 그래프 경계를 기반으로, 로컬 탐색 액션 공간을 글로벌 액션 단계와 연결시켜 더 나은 글로벌 계획을 가능하게 했다.
+
+* **LLM-based Planner**: 일부 연구에서는 LLM의 상식적 지식을 활용하여 텍스트 기반 계획을 생성한다. *LLM-Planner(Song et al., 2022)* 는 하위 목표들로 구성된 상세한 계획을 생성하며, 미리 정의된 프로그램 패턴에 따라 탐지된 객체를 통합해 실시간으로 계획을 동적으로 조정한다. 마찬가지로 *Mic(Qiao et al., 2023b)* 와 *A2Nav(Chen et al., 2023b)* 는 탐색 작업을 세부적인 텍스트 지시로 분해하는 데 특화되어 있다. *Mic*는 정적 및 동적 관점 모두에서 단계별 계획을 생성하는 반면, *A2Nav*는 GPT-3를 사용해 지시를 실행 가능한 하위 작업으로 분석한다. *ThinkBot(Lu et al., 2023)* 은 CoT 추론(Chain of Thoughts Reasoning)을 활용하여 주어진 환경에서 상호작용 가능한 객체들과 함께 누락된 행동(현재 계획에서 빠져있지만 수행해야 할 중요한 행동)이나 다음에 해야 할 행동을 예측하거나 생성한다. 또한, *SayNav(Rajvanshi et al., 2023)* 는 탐색된 환경의 3D 장면 그래프(scene graph)를 LLM의 입력으로 사용하여 내비게이터를 위한 적합하고 상황에 맞는 고차원 계획을 생성한다.
+
+### 5.3. Foundation Models as VLN Agents
+파운데이션 모델의 등장으로 VLN 에이전트의 아키텍처는 큰 변화를 겪었다. *Anderson et al., (2018)* 이 처음 제안한 VLN 에이전트는 *Seq2Seq* 프레임워크 내에서 개념화되었으며, 시각과 언어 모달리티 간의 상호작용을 모델링하기 위해 *LSTM*과 *Attention mechanism*을 사용하였다. 파운데이션 모델의 등장과 함께, 에이전트의 백엔드는 *LSTM*에서 트랜스포머로, 그리고 최근에는 대규모 사전 학습된 시스템으로 전환되었다.
+
+* **VLMs as Agents**: 주류 방법론은 **single-stream 비전-언어 모델**을 VLN 에이전트의 핵심 구조로 사용한다. 이러한 모델은 각 timestep마다 언어, 시각, 이력 토큰으로부터 입력을 동시에 처리하고, cross-modal tokens에 대해 self-attention을 수행하여 텍스트와 시각적 정보 간의 상호 연관성(correspondence)을 파악한다. 이를 바탕으로 행동 확률(action probability)을 추론한다. *VLN-CE* (연속 환경에서의 VLN) 에이전트 *[(Krantz et al., 2020)](https://openaccess.thecvf.com/content/CVPR2022/html/Hong_Bridging_the_Gap_Between_Learning_in_Discrete_and_Continuous_Environments_CVPR_2022_paper.html)* 는 *VLN-DE* (이산 환경에서의 VLN) 에이전트 *[(Anderson et al., 2018)](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html)* 에이전트와는 달리, 그래프 기반의 고수준 액션 대신 연속된 환경에서 저수준 컨트롤을 실행한다. 초기 연구에서는 *LSTM*을 사용해 저수준 동작을 추론했지만, *waypoint predictor*가 도입되면서 DE에서 CE로의 방법 전환이 이루어졌다. 이러한 방법들은 **local navigability graph**를 얻기 위해 *waypoint predictor*를 사용하여, DE의 파운데이션 모델이 연속된 환경에 적용될 수 있도록 했다.
+
+* **LLMs as Agents**: LLM은 뛰어난 추론 능력과 환경에 대한 의미적 추상화를 제공하며, 특히 대규모 미지의 환경에서의 강력한 일반화 능력을 보여주었다. 최근 많은 VLN 연구에서 LLM을 에이전트로 직접 사용하여 탐색 작업을 수생하는 방법이 채택되고 있다. 일반적으로 시각적 관찰을 텍스트 설명으로 변환한 후 지시사항과 함께 LLM에 입력하면, LLM은 행동 을 예측한다. *[NavGPT(Zhou et al., 2024a)](https://arxiv.org/abs/2305.16986)* 와 *[MapGPT(Chen et al., 2024a)](https://arxiv.org/abs/2401.07314)* 의 연구에서는 LLM을 적용한 제로샷 탐색의 가능성을 보여주며, *NavGPT* 는 GPT-4를 사용하여 자율적으로 행동을 생성하고,  *MapGPT* 에서는 토폴로지 맵을 글로벌 탐색 힌트로 변환하는 방법을 제안한다. *[DiscussNav(Long et al., 2024)](https://sites.google.com/view/discussnav)* 는 여러 도메인에 특화된 LLM expert를 배치하여 탐색 작업에서 인간의 개입을 줄이고 자동화하는 접근법을 확장하였다. 일부 연구에서는 CoT(Chain-of-Thought) 추론 메커니즘을 도입하여 추론 과정을 개선하고 있다. *[NavCoT(Lin et al., 2024a)](https://arxiv.org/abs/2403.07376)* 프레임워크는 LLM을 *World Model*과 내비게이션 추론 에이전트로 변환하여, 미래의 환경을 시뮬레이션하면서 의사결정을 간소화하였다. *[MC-GPT(Zhan et al., 2024b)](https://arxiv.org/abs/2405.10620)* 는 메모리 토폴로지 맵과 인간의 탐색 사례를 사용해 전략을 다양화했으며, *[InstructNav(Long et al., 2024)](https://arxiv.org/abs/2406.04882)* 는 multi-sourced value map을 사용하여 전체 탐색 작업을 하위 작업으로 분해하고 이를 효과적으로 실행하는 방법을 제안하였다. 제로샷 접근법과는 달리, 일부 연구는 LLM을 fine-tuning하여 에이전트가 embodied navigation 작업을 보다 효과적으로 처리할 수 있도록 했다. *([Zheng et al., 2024](https://arxiv.org/abs/2312.02010); [Zhang et al., 2024a](https://arxiv.org/abs/2402.15852); [Pan et al., 2023](https://arxiv.org/abs/2310.07889))* 이는 시뮬레이션과 실제 환경 모두에서 fine-tuning된 언어모델이 유연하고 실용적일 수 있음을 보여준다.
+
+## 6. Challenges and Future Directions
+파운데이션 모델이 VLN에 새로운 솔루션을 제공했지만 앞으로 해결해야 할 몇 가지 중요한 limitations이 남아있으며, 새로운 도전 과제들도 계속해서 등장하고 있다. 이 섹션에서는 *Benchmarks*, *World Model*, *Human Model*, *Agent Model*, *Real-robot Deployment* 관점에서 VLN의 과제와 미래 방향을 다룬다.
+
+* **Benchmarks: Limitations of Data and Task**: 현재의 VLN 데이터셋은 quality, diversity, bias, scalability에서 한계가 있다. 예를 들어, R2R 데이터셋에서 지시-경로 쌍은 최단 경로에 편향되어 있어 실제 환경 탐색 시나리오를 정확하게 반영하지 못할 수 있다.
+
+* **World Model: From 2D to 3D**: 효과적인 world representations을 구축하는 것은 embodied perception, reasoning, and planning에서 핵심 연구 주제이다. 기존의 연구는 강력하고 일반적인 2D 표현을 사용했지만, VLN은 본질적으로 3D 작업이며 에이전트는 실제 세계 환경을 3D로 인식한다는 점에서 최근 연구들에서는 다양한 *Semantic SLAM*과 *Volumetric represenation*, *Depth information*, *Bird's-Eye-View representation like grid map* 그리고 *Local metrics map* 등 명시적인 3D 표현이 활용되고 있다. 그러나 이러한 표현은 객체 세트를 폐쇄된 세트로 축소하기 때문에, 자연어를 사용하는 open-vocabulary 환경에는 적합하지 않다는 한계가 있다.
+<br><br>
+몇몇 연구는 *CLIP* 모델에서 얻은 다중 시점 이미지 특징을 *3D voxel grid* 또는 *top-down feature map*에 통합하여 질의 가능한 맵 또는 장면 표현을 제안하였다. 또한, *scene graphs*를 사용해 공간적 관계를 표현하고 있다. 하지만, VLN 에이전트가 3D 환경을 더 잘 인식할 수 있도록 대규모 데이터셋에서 학습된 3D 표현을 적용하는 것은 여전히 많은 연구가 필요한 과제이다. 최근에는 3D 파운데이션 모델을 활용하는 방법들이 제안되고 있는데, 여기에는 *3D reconstruction models* 과 *3D multimodal language models* 등이 포함되어 있으며, 이는 VLN 작업에 매우 중요한 역할을 할 수 있다.
+
+* **Human Model: From Instruction to Dialogue**: 이전 연구들은 주로 speaker-listener 패러다임 또는 에이전트가 도움을 요청하는 방식의 제한된 QA 대화 방식을 채택해 왔다. 그러나 최근에는 에이전트가 자유롭게 질문, 제안, 설명, 명확화, 협상 등을 수행할 수 있는 *open-ended dialogue instructions*를 지원하는 새로운 벤치마크들이 등장하고 있다. 그럼에도 불구하고, 현재의 접근 방식은 여전히 복잡하거나 모호한 상황을 처리하기 위해 rule-based의 대화 템플릿을 사용하고 있으며, 그 안에 파운데이션 모델의 요소가 포함될 수 있다. 앞으로의 연구는 상황에 맞는 작업 지향적인 대화를 더 효과적으로 관리하기 위해 파운데이션 모델을 통합하거나, 기존의 파운데이션 모델을 더 깊이 탐구하는 방향으로 나아갈 필요가 있다.
+
+* **Agent Model: Adapting Foundation Models for VLN**: 파운데이션 모델들이 강력한 일반화 능력을 보여주기는 하지만, 이들을 내비게이션 작업에 적용하는 것은 여전히 많은 도전 과제가 있다. 특히, LLM은 본질적으로 실제 환경을 시각적으로 인지할 수 없으며, *hallucinations* 라는 문제를 안고 있다. 또한, LLM의 *Embodied Experience*의 한계로 인해 작업 계획과 추론에 기존의 상식에 의존하게 되고, 이는 특정한 현실 세계의 요구를 충족시키지 못할 수 있다. 일부 파이프라인은 시각적 관찰을 텍스트 설명으로 변환해 이를 LLM의 프롬프트로 사용해 이러한 문제를 해결하려 하지만, 이때 중요한 시각적 정보가 손실될 가능성이 있다. LLM과 비교할 때, VLM 에이전트는 시각적 세계를 인지하고 계획할 수 있는 잠재력을 보여준다. 하지만 이러한 모델들은 주로 internet data로부터 학습되었기 때문에, *embodied experience* 즉, 체험적 경험이 부족하며 이를 해결하고 견고한 에이전트 결정 능력을 위해서는 추가적인 파인튜닝이 필요하다. 앞으로의 연구에서는 파운데이션 모델의 commonsense knowledge를 embodied situations로 일반화할 수 있는 방법을 모색해야 한다.
+다음으로, LLM과 VLM은 존재하지 않는 객체를 생성해 잘못된 정보를 제공할 수 있다. (*Hallucination*) 예를 들어, LLM이 작업 계획을 수행할 때 방 안에 소파가 없음에도 불구하고 "앞으로 가서 소파에서 왼쪽으로 돌기" 같은 잘못된 지시를 생성할 수 있다. 이러한 부정확성은 에이전트가 잘못된 또는 불가능한 행동을 실행하게 만들 수 있다.
+
+* **Deployment: From Simulation to Real Robots**: 시뮬레이션 환경은 실제 세계의 복잡성과 변동성을 반영하지 못하며, 낮은 품질의 렌더링된 이미지들이 이 문제를 더욱 악화시킬 수 있다. 우선, 지각 차이로 인해 성능과 정확도가 저하되며, 이는 더 강력한 지각 시스템의 필요성을 강조한다. *[Wang et al., (2024b)](https://arxiv.org/abs/2406.09798)* 는 단안 카메라로 파노라마 인식을 제공하는 semantic map과 3D feature fields를 연구하였으며, 이는 VLN 성능 개선을 보여주었다. Embodiment gap과 Data scarcity 또한 bottlenecks이 되고 있는데, *[Robot teleportation (He et al., 2024b)](https://arxiv.org/abs/2403.04436)* 의 등장은 파운데이션 모델을 위한 VLN 데이터를 실제 인간-로봇 커뮤니케이션에 맞게 확장하는 대안으로 제시되고 있다.
