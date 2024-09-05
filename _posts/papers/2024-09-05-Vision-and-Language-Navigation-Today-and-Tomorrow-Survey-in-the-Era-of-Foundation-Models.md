@@ -26,13 +26,13 @@ published: true
 
 ![Figure1](/assets/img/papers/2024-09-05/Figure1.png){: width="100%" }
 
-구체적으로, 각 내비게이션 단계에서 AI 에이전트는 시각적 환경을 인식하고, 인간으로부터 언어적 지시를 받고, 에이전트 스스로 이해할 수 있는 표현을 바탕으로 계획을 세우고 내비게이션 작업을 효율적으로 수행한다. 이는 **[그림1]** 에 나와 있듯이, *World Model*은 에이전트가 주변의 외부 환경을 이해하고, 자신의 행동이 world state를 어떻게 변화시키는지를 이해하는 추상화이다. 이 모델은 확장된 *Agent Model*의 일부로 *Human Model*도 포함하여 인간의 지시를 해석하고, 이를 통해 에이전트의 목표를 형성한다. 본 서베이에서는 VLN 연구의 발전을 리뷰하고 달성된 이정표를 이해하기 위해, 아래의 세 가지 관점에서 근본적인 도전을 중심으로 내용을 구조화해서 설명하고 있다.
+구체적으로, 각 내비게이션 단계에서 AI 에이전트는 시각적 환경을 인식하고, 인간으로부터 언어적 지시를 받고, 에이전트 스스로 이해할 수 있는 표현을 바탕으로 계획을 세우고 내비게이션 작업을 효율적으로 수행한다. 이는 **그림1** 에 나와 있듯이, *World Model*은 에이전트가 주변의 외부 환경을 이해하고, 자신의 행동이 world state를 어떻게 변화시키는지를 이해하는 추상화이다. 이 모델은 확장된 *Agent Model*의 일부로 *Human Model*도 포함하여 인간의 지시를 해석하고, 이를 통해 에이전트의 목표를 형성한다. 본 서베이에서는 VLN 연구의 발전을 리뷰하고 달성된 이정표를 이해하기 위해, 아래의 세 가지 관점에서 근본적인 도전을 중심으로 내용을 구조화해서 설명하고 있다.
 
 * Learning a *World Model* to represent the visual environment and generalize to unseen ones.
 * Learning a *Human Model* to effectively interpret human intentions from grounded instructions.
 * Learning a VLN agent that leverages its *World and Human Model* to ground language, communicate, reason, and plan, enabling it to navigate environments as instructed.
 
-이 서베이에서는 각 모델에 대해 파운데이션 모델을 기반으로 한 도전 과제, 솔루션 및 미래 방향을 논의하기 위해 **[그림2]** 에서 계층적이고 세분화된 분류를 제시한다. 또한, VLN 연구 분야의 배경 및 관련 연구 노력 뿐만 아니라 가용한 벤치마크에 대한 간략한 개요도 다루고 있다. 그런 다음 제안된 방법이 세 가지 주요 도전 과제인 *World Model*, *Human Model*, *VLN agent*를 어떻게 해결했는지에 중점을 둔다. 마지막으로, 파운데이션 모델의 성장에 비추어 현재의 도전 과제와 미래 연구 기회를 논의하고 있다.
+이 서베이에서는 각 모델에 대해 파운데이션 모델을 기반으로 한 도전 과제, 솔루션 및 미래 방향을 논의하기 위해 **그림2** 에서 계층적이고 세분화된 분류를 제시한다. 또한, VLN 연구 분야의 배경 및 관련 연구 노력 뿐만 아니라 가용한 벤치마크에 대한 간략한 개요도 다루고 있다. 그런 다음 제안된 방법이 세 가지 주요 도전 과제인 *World Model*, *Human Model*, *VLN agent*를 어떻게 해결했는지에 중점을 둔다. 마지막으로, 파운데이션 모델의 성장에 비추어 현재의 도전 과제와 미래 연구 기회를 논의하고 있다.
 
 ![Figure2](/assets/img/papers/2024-09-05/Figure2.png){: width="100%" }
 
