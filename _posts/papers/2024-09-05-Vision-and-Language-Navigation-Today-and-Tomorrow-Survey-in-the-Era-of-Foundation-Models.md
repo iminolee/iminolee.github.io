@@ -24,7 +24,7 @@ published: true
 
 본 서베이 논문이 제시하는 목표는 두 가지이다. 첫째, 이 분야에서 파운데이션 모델의 역할과 기회를 탐구합니다. 둘째, VLN의 다양한 과제와 솔루션을 *Language Model, Agent Model and World Model*의 백본으로서 파운데이션 모델이 역할을 하는 체계적인 LAW 프레임워크[(Hu and Shu, 2023)](https://arxiv.org/abs/2312.05230) 내에서 연구자들에게 조직화하는 것이다.
 
-![Figure1](/assets/img/papers/2024-08-26/Figure1.png){: width="100%" }
+![Figure1](/assets/img/papers/2024-09-05/Figure1.png){: width="100%" }
 
 구체적으로, 각 내비게이션 단계에서 AI 에이전트는 시각적 환경을 인식하고, 인간으로부터 언어적 지시를 받고, 에이전트 스스로 이해할 수 있는 표현을 바탕으로 계획을 세우고 내비게이션 작업을 효율적으로 수행한다. 이는 **[그림1]** 에 나와 있듯이, *World Model*은 에이전트가 주변의 외부 환경을 이해하고, 자신의 행동이 world state를 어떻게 변화시키는지를 이해하는 추상화이다. 이 모델은 확장된 *Agent Model*의 일부로 *Human Model*도 포함하여 인간의 지시를 해석하고, 이를 통해 에이전트의 목표를 형성한다. 본 서베이에서는 VLN 연구의 발전을 리뷰하고 달성된 이정표를 이해하기 위해, 아래의 세 가지 관점에서 근본적인 도전을 중심으로 내용을 구조화해서 설명하고 있다.
 
@@ -34,7 +34,7 @@ published: true
 
 이 서베이에서는 각 모델에 대해 파운데이션 모델을 기반으로 한 도전 과제, 솔루션 및 미래 방향을 논의하기 위해 **[그림2]** 에서 계층적이고 세분화된 분류를 제시한다. 또한, VLN 연구 분야의 배경 및 관련 연구 노력 뿐만 아니라 가용한 벤치마크에 대한 간략한 개요도 다루고 있다. 그런 다음 제안된 방법이 세 가지 주요 도전 과제인 *World Model*, *Human Model*, *VLN agent*를 어떻게 해결했는지에 중점을 둔다. 마지막으로, 파운데이션 모델의 성장에 비추어 현재의 도전 과제와 미래 연구 기회를 논의하고 있다.
 
-![Figure2](/assets/img/papers/2024-08-26/Figure2.png){: width="100%" }
+![Figure2](/assets/img/papers/2024-09-05/Figure2.png){: width="100%" }
 
 ## 2. Background and Task Formulations
 이 섹션에서는 VLN의 연구 배경과 VLN 문제 정의 및 벤치마크에 대한 간략한 개요를 제공하고 있다.
@@ -48,7 +48,7 @@ published: true
 ### 2.3. Task Formulations and Benchmarks VLN Task Definition
 2.3.1. **VLN Task Definition**: 전형적인 VLN 에이전트는 **지정된 위치**에서 사람으로부터 언어적 지시를 수신하며, egocentric한 visual perspective를 사용하여 환경을 탐색한다. 지시를 따름으로써, 에이전트의 작업은 일련의 이산적인 뷰 또는 목적지로 도달하는 저수준의 행동과 제어(e.g., 앞으로 0.25 meter)를 통해 경로를 생성하는 것이다. 이때 에이전트는 목적지에서 지정된 거리 내에 도착하면 성공한 것으로 간주된다. 또한 에이전트는 탐색 중에 사람과 추가적인 정보를 교환할 수 있으며, 도움을 요청하거나 자유 형식의 언어적 소통에 참여가 가능하다. 게다가 VLN 에이전트가 탐색과 함께 조작 및 객체 탐지와 같은 추가 작업을 통합하는 것에 대한 기대가 증가하고 있다.
 
-![Table1](/assets/img/papers/2024-08-26/Table1.png){: width="100%" }
+![Table1](/assets/img/papers/2024-09-05/Table1.png){: width="100%" }
 
 2.3.2. **Benchmarks**: 기존의 VNL 벤치마크는 탐색이 이뤄지는 환경, 인간 상호작용의 유형, VLN 에이전트의 작업 및 행동 공간, 데이터셋 수집 방법 등의 여러 주요 측면을 기반으로 분류할 수 있다. 대표적으로 VLN 연구의 교본이라고 할 수 있는 논문인 [*Vision-and-Language Navigation: Interpreting visually-grounded navigation instructions in real environments.(Anderson et al., CVPR, 2018)*](https://openaccess.thecvf.com/content_cvpr_2018/html/Anderson_Vision-and-Language_Navigation_Interpreting_CVPR_2018_paper.html) 에서는 [*Matterport3D Simulator(Chang et al., arXiv, 2017)*](https://arxiv.org/abs/1709.06158)를 기반으로 *Room-to-Room (R2R)* 데이터셋을 생성하여, 에이전트가 세밀한 탐색 지시를 따라 목표에 도달해야 하는 작업을 제시했다. *[Room-across-Room (RxR) (Ku et al., EMNLP, 2020)](https://arxiv.org/abs/2010.07954)* 은 영어, 힌디어 및 텔루구어 지시를 포함한 다국어 변형으로, 더 큰 샘플 크기와 함께 가상의 위치에 대한 time-aligned 지시를 제공한다. *Matterport3D*는 VLN 에이전트가 *discretized environment*에서 작동하고 사전 정의된 *connectivity graphs*를 사용하여 내비게이션을 수행할 수 있도록 하며, 에이전트가 인접 노드 사이를 순간이동하여 그래프를 따라 이동할 수 있다. 이를 _**VLN_DE**_ 라고 한다. 더 현실적인 설정을 위해, [Krantz et al., ECCV, (2020)](https://openreview.net/forum?id=BRjplxPwk1); [Li et al., RAL, (2022c)](https://ieeexplore.ieee.org/abstract/document/9674225/?casa_token=2cWcJ2grOnIAAAAA:Lj1NICqxcD_R5KoDM7hMVlJLohIY5Dr5eBsrWk9ItePI1ivj31jPt82r7zYqbKTj0io3xIm06A); [Irshad et al., ICRA, (2021)](https://ieeexplore.ieee.org/abstract/document/9561806?casa_token=CbovhTReh2wAAAAA:TFJB2z0y31w4IkbmhKTpH0IZFHublJENX2YCXZ9sOE1oEhyXkMpGs1BfYrChho7L_X61wrbwsQ)는 이러한 이산적인 R2R 경로를 연속적인 공간으로 전환하여 VLN을 연속적인 환경(_**VLN_CE**_)에서 제안하였다. 최근에는 이러한 연속적인 행동 공간을 가진 로봇 설정에서 더욱 현실적인 sim-to-real의 격차를 좁히기 위한 VLN 연구가 제안되고 있다.
 
