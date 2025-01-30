@@ -944,7 +944,10 @@
 	text-align: center;
 	.client-item {
 		img {
-			max-width: 100%;
+			max-width: 236px;
+			max-height: 133px;
+			width: auto;
+			height: auto;
 			opacity: 0.4;
 		}
 	}
