@@ -227,7 +227,7 @@ skills:
 
 ### Portfolio [ portfolio ]
 portfolio:
-  title: "Research Entries"
+  title: "Dashboard"
   filters:
     - name: "All"
       slug: "grid-item"
