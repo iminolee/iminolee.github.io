@@ -1,0 +1,32 @@
+# Vcard configuration file
+##
+### param "bgimage" - Background Image or Background Photo
+### param "photo" - Small circle photo
+### param "name" - Your Name
+### param "typed" - Typed text under Name
+### param "social" - Social Links, icon class name you can find here https://fontawesome.com/icons?d=gallery&s=brands&m=free
+### param "buttons" - Buttons, icon class you can find here https://ionicons.com/v4/
+
+main:
+  bgimage: ""
+  photo: ""
+  name: "Minho Lee"
+  typed:
+    - text: "Master's Student"
+    - text: "Robotics Engineer"
+    - text: "AI Researcher"
+    - text: "Blogger"
+  social:
+    - title: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/iminolee"
+    - title: "Twitter"
+      icon: "fab fa-twitter"
+      url: "https://twitter.com/"      
+  buttons:
+    - title: "Download CV"
+      icon: ""
+      url: "https://drive.google.com/"
+    - title: "Contact Me"
+      icon: ""
+      url: "mailto:mino@inha.edu"

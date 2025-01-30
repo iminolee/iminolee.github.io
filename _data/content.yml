@@ -1,0 +1,282 @@
+# Sections content configuration file
+
+### About [ about ]
+about:
+  title: "About Me"
+  text: "
+        <p>
+          <strong>Hello! I’m Minho Lee.</strong><br> Master's student at Inha University in Incheon, South Korea.<br> My research interests focus on advancing the integration of AI and Robotics to address complex real-world challenges. I hope to share ideas about the future of AI-driven robotic society with you.
+        </p>
+        "
+  list:
+    - label: "Email"
+      value: "mino@inha.edu"
+
+    - label: "Address"
+      value: "Incheon, South Korea"
+
+    - label: "Department"
+      value: "Electrical and Computer Engineering, SPARO Lab"
+
+    - label: "Keywords"
+      value: "Spatial Intelligence<br> Vision-Language Action Planning<br> LiDAR SLAM"
+
+### Facts [ facts ]
+facts:
+  title: "Fun Facts"
+  items:
+    - icon: "android-walk"
+      name: "365 Days of Fitness"
+
+    - icon: "star"
+      name: "50+ Stars on GitHub"
+
+    - icon: "trophy"
+      name: "4 Awards Won"
+
+    - icon: "plane"
+      name: "5 Countries Visited"
+
+### Services [ services ]
+services:
+  title: "Research Interests"
+  items:
+    - image: "assets/img/interests/interests_1.png"
+      icon: "code"
+      name: "Embodied Task Planning"
+      text: "Integration of VLM/LLMs for robot task planning in the open world."
+      h_line: 1
+
+    - image: "assets/img/interests/interests_2.png"
+      icon: "music-note"
+      name: "Human-Robot Interaction"
+      text: "Adaptive and context-aware human-robot interaction model."
+      h_line: 1
+
+    - image: "assets/img/interests/interests_3.png"
+      icon: "map"
+      name: "Smart Industrial Mobile Robot"
+      text: "Autonomous robotic solutions for industrial efficiency and safety."
+      h_line: 0
+
+    - image: "assets/img/interests/interests_4.png"
+      icon: "ios-game-controller-b"
+      name: "LiDAR SLAM"
+      text: "Precise real-time localization and mapping using LiDAR for navigation."
+      h_line: 0
+
+### Clients [ clients ]
+clients:
+  title: "Project Previews"
+  items:
+    - url: "https://www.youtube.com/watch?v=ryRLNU31uVk&list=PL9K1wJin-si8gp3EvcwTxwC9IR75M9jiP"
+      image: "assets/img/projects/project_1.png"
+      name: "VisionAid: A Smart Guide for the Visually Impaired"
+
+    - url: "https://github.com/iminolee/IsaacSim-Autonomous-Forklift"
+      image: "assets/img/projects/project_2.gif"
+      name: "IsaacSim Implementation of an Autonomous Robot Forklift System"
+
+    - url: "https://www.google.com"
+      image: "assets/img/projects/project_3.png"
+      name: "Update Soon!"
+
+    - url: "https://www.google.com"
+      image: "assets/img/projects/project_4.png"
+      name: "Update Soon!"
+
+### Testimonials [ testimonials ]
+testimonials:
+  title: "News"
+  items:
+    - image: "assets/img/news/swcontest.png"
+      name: "Minister of Trade, Industry and Energey Award"
+      subname: "Jungwoo Lee, <b>Minho Lee</b>, Gihyeon Lee, Dongjin Cho"
+      text: "[2024.11] Awarded the Grand Prize in the 22nd Embedded Software Contest, Industry-Academia Project Category!"
+
+    - image: "assets/img/news/iccas2024.png"
+      name: "Dynamic Multi-Object Analysis Using Particles for Social Navigation"
+      subname: "<b>Minho Lee</b>, Miryeong Park, Jiyun Lee, and Younggun Cho"
+      text: "[2024.08] One paper is accepted by ICCAS 2024!"
+
+    - image: "assets/img/news/hanhwa.png"
+      name: "Hanhwa Aerospace for Future Tech Challenge Award"
+      subname: "Juwon Kim, <b>Minho Lee</b>, Euncheol Choi, Gihyeon Lee"
+      text: "[2024.07] Awarded the Excellence Prize in the 2024 Aero Future Tech&Business Idea Competition, Tech Category!"
+
+    - image: "assets/img/news/kros2024.png"
+      name: "Localization method for Autonomous Driving in urban GPS-shading area based on ICP algorithm"
+      subname: "<b>Minho Lee</b>, Gihyeon Lee, Miryeong Park, Jiyun Lee, Jaeyong Lee and Younggun Cho"
+      text: "[2024.02] Two papers are accepted by KROS 2024!"
+
+    - image: "assets/img/news/morai.png"
+      name: "President's Award, Korea Automobile Testing&Research Institue (KATRI)"
+      subname: "<b>Minho Lee</b>, Miryeong Park, Jiyun Lee, Gihyeon Lee, Jaeyong Lee"
+      text: "[2023.10] Awarded the Excellent Algorithm Prize at the Seoul Virtual Driving Challenge!"
+
+### Resume [ resume ]
+resume:
+  title: "Resume"
+  experience:
+    title: "Education"
+    icon: "university"
+    items:
+      - year: "2024 - Present"
+        role: "Inha University @SPARO Lab."
+        company: "Incheon, South Korea"
+        text: "<b>M.S in Electrical and Computer Engineering</b>. Conducting research on Vision-Language Action Planning for Robotics. The research focuses on multi-modal reasoning, VLM/LLMs-based robot navigation, and human-robot interaction"
+        active: 1
+        h_line: 1
+
+      - year: "2016 - 2023"
+        role: "Inha University"
+        company: "Incheon, South Korea"
+        text: "<b>B.S in Electrical Engineering</b>, focused on Automotive Sensor Technologies and Power Systems."
+        active: 0
+        h_line: 1
+
+  education:
+    title: "Experience"
+    icon: "briefcase"
+    items:
+      - year: "2023 - 2024"
+        institution: "Undergraduate Internship"
+        city: "SPARO Lab."
+        text: ""
+        h_line: 1
+
+      - year: "2023 - 2023"
+        institution: "Hyundai H-Mobility Class"
+        city: "Robotics track"
+        text: ""
+        h_line: 1
+
+      - year: "2023 - 2023"
+        institution: "Programmers Dev-Course"
+        city: "Path Planning & Control"
+        text: ""
+        h_line: 1
+
+### Publication [ publication ]
+publication:
+  title: "Publication"
+  items:
+    - type: "conference"
+      year: "2025.02"
+      title: "Training Object detection model with Synthetic data in Logistic Environments"
+      author: "Jiyun Lee, Wonhyeok Jeong, Chohui Shin, Jehwan Jeon, <b>Minho Lee</b>, Jinyong Jeong and Younggun Cho"
+      venue: "In Proceedings of the 20th Korea Robotics Society Annual Conference (KRoC), 2025"
+      link: 
+
+    - type: "conference"
+      year: "2024.08"
+      title: "Dynamic Multi-Object Analysis Using Particles for Social Navigation"
+      author: "<b>Minho Lee</b>, Miryeong Park, Jiyun Lee, and Younggun Cho"
+      venue: "International Conference on Control Automation and Systems (ICCAS), 2024"
+      link: "https://ieeexplore.ieee.org/abstract/document/10773378"
+
+    - type: "conference"
+      year: "2024.02"
+      title: "Localization method for Autonomous Driving in urban GPS-shading area based on ICP algorithm"
+      author: "<b>Minho Lee</b>, Gihyeon Lee, Miryeong Park, Jiyun Lee, Jaeyong Lee and Younggun Cho"
+      venue: "In Proceedings of the 19th Korea Robotics Society Annual Conference (KRoC), 2024"
+      link: "https://sites.google.com/inha.edu/sparolab/home"
+
+    - type: "conference"
+      year: "2024.02"
+      title: "Simplified Optimal Path Selection Algorithm Based on Lattice Planner for Autonomous Vehicles"
+      author: "Miryeong Park, Jaeyong Lee, Jiyun Lee, <b>Minho Lee</b>, Gihyeon Lee and Younggun Cho"
+      venue: "In Proceedings of the 19th Korea Robotics Society Annual Conference (KRoC), 2024"
+      link: "https://sites.google.com/inha.edu/vi2re-planning-kros-conference/introduction"
+
+### Skills [ skills ]
+skills:
+  title: "Skills"
+  columns:
+    - type: "default" #skills progress type - default, dotted, circles, list
+      title: "Skills"
+      icon: "code"
+      items:
+        - label: "Python"
+          value: "80" #0-100 progress in %
+
+        - label: "C++"
+          value: "45" #0-100 progress in %
+
+        - label: "ROS / ROS2"
+          value: "70" #0-100 progress in %
+
+        - label: "Gazebo / Isaac Sim"
+          value: "65" #0-100 progress in %
+
+    - type: "dotted" #skills progress type - default, dotted, circles, list
+      title: "Languages"
+      icon: "chatbubble"
+      items:
+        - label: "Korean"
+          value: "90" #0-100 progress in %
+
+        - label: "English"
+          value: "80" #0-100 progress in %
+
+        - label: "Japanese"
+          value: "30" #0-100 progress in %
+
+        - label: "Chinese"
+          value: "20" #0-100 progress in %
+
+### Portfolio [ portfolio ]
+portfolio:
+  title: "Research Entries"
+  filters:
+    - name: "All"
+      slug: "grid-item"
+      active: 1
+
+# Active Projects, Completed Projects, Planned Projects etc.
+    - name: "Projects"
+      slug: "photo"
+      active: 0
+
+# Research Focus, Skill Development etc.
+    - name: "Areas"
+      slug: "video"
+      active: 0
+
+# Papers&Readings, Tools&Frameworks, Dataset References, Tutorials&Guides etc.
+    - name: "Resources"
+      slug: "music"
+      active: 0
+
+# Conference Logs, Experiments Logs, Past Achievements etc.
+    - name: "Archives"
+      slug: "music"
+      active: 0
+
+#     - name: "Design"
+#       slug: "design"
+#       active: 0
+
+### Blog [ blog ]
+blog:
+  title: "Latest Posts"
+
+### Contact Info List [ contacts-info ]
+contacts_info:
+  title: "Get in Touch"
+  list:
+    - label: "Name"
+      value: "Minho Lee"
+
+    - label: "Address"
+      value: "Incheon, South Korea"
+
+    - label: "Email"
+      value: "mino@inha.edu"
+
+    - label: "GitHub"
+      value: "<a href='https://github.com/iminolee' target='_blank'>iminolee</a>"
+
+### Contact Form [ contacts-form ]
+contacts_form:
+  title: "Contact Form"

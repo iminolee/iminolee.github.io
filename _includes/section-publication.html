@@ -1,0 +1,89 @@
+{% assign content = site.data.content['publication'] %}
+
+<!-- Publication -->
+<div class="content publication">
+
+    {% if content.title != '' %}
+    <!-- title -->
+    <div class="title">{{ content.title }}</div>
+    {% endif %}
+
+    <!-- content -->
+    <div class="row">
+        <!-- Publication -->
+        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+
+            {% if content.items %}
+                {% assign conference_items = content.items | where: "type", "conference" %}
+                {% assign journal_items = content.items | where: "type", "journal" %}
+            {% else %}
+                {% assign conference_items = "" %}
+                {% assign journal_items = "" %}
+            {% endif %}
+
+			<!-- Conference Section -->
+                <div class="publication-section">
+                    <div class="publication-title">
+                        <div class="icon">
+                            <i class="ion-android-microphone"></i>
+                        </div>
+                        <div class="name">CONFERENCE</div>
+                    </div>
+                    <div class="publication-list">
+                        {% for item in conference_items %}
+                        <div class="publication-item">
+                            <div class="pub-year">{{ item.year }}</div>
+                            <div class="pub-details">
+                                <div class="pub-title">
+                                    <strong>
+                                        {% if item.link %}
+                                            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                                        {% else %}
+                                            {{ item.title }}
+                                        {% endif %}
+                                    </strong>
+                                </div>
+                                <div class="pub-author">{{ item.author }}</div>
+                                <div class="pub-venue">{{ item.venue }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+			<!-- Conference Section -->
+                <div class="publication-section">
+                    <div class="publication-title">
+                        <div class="icon">
+                            <i class="ion-document-text"></i>
+                        </div>
+                        <div class="name">JOURNAL</div>
+                    </div>
+                    <div class="publication-list">
+                        {% for item in journal_items %}
+                        <div class="publication-item">
+                            <div class="pub-year">{{ item.year }}</div>
+                            <div class="pub-details">
+                                <div class="pub-title">
+                                    <strong>
+                                        {% if item.link %}
+                                            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                                        {% else %}
+                                            {{ item.title }}
+                                        {% endif %}
+                                    </strong>
+                                </div>
+                                <div class="pub-author">{{ item.author }}</div>
+                                <div class="pub-venue">{{ item.venue }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>	 
+
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+
+</div>
