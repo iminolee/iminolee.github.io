@@ -9,6 +9,7 @@
 
 /* TABLE OF CONTENTS
 	1. Blog Post
+	2. Blog ToC
 */
 
 
@@ -336,4 +337,44 @@
 			}
 		}
 	}
+
+/*
+	2. Blog ToC
+*/
+
+.toc {
+	width: 60%;
+	padding: 15px;
+	font-size: 1.0rem;
+	border: 1px solid #ccc;
+	background-color: #f9f9f9;
+	margin: 0 auto;
+	margin-bottom: 20px;
+  }
+  
+  .toc-title {
+	margin-top: 0;
+	font-size: 1.2rem;
+	border-bottom: 2px solid #e0d9e7;
+	padding-bottom: 5px;
+  }
+  
+  .toc ul {
+	list-style-type: none;
+	padding-left: 0;
+  }
+  
+  .toc li {
+	margin: 5px 0;
+  }
+  
+  .toc a {
+	text-decoration: none;
+	color: #333;
+  }
+  
+  .toc a:hover {
+	color: #007acc;
+  }
+
 }
