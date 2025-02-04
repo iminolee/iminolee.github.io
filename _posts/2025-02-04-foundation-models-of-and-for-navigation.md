@@ -70,7 +70,7 @@ Robot Foundation Model이란 용어는 많은 의미를 포함하고 있으며, 
 - 향후 연구에서는 기존 모델에 <u>사회적 보상함수 추가</u>, <u>새로운 모달리티(텍스트/GPS 기반 목표) 적용</u>, <u>더 많은 로봇 모델 및 작업을 학습한 통합 모델로의 확장</u>의 방향이 진행될 것이다.
 
 끝으로, 앞서 언급된 모델 및 관련 프레임워크는 아래 GitHub에서 확인할 수 있다.
-* <a href="https://vlmnm-workshop.github.io/"> Berkeley AI Research & Dhruv Shah Github</a>
+* <a href="https://github.com/robodhruv/visualnav-transformer"> Berkeley AI Research & Dhruv Shah Github</a>
 
 내가 연구하는 필드에서 Dhruv Shah 박사님의 연구들은 큰 주목을 받았었고, 현재도 많은 관심을 받고 있다. 앞으로도 의미 있는 연구들이 나올 것으로 기대되기 때문에, 계속해서 살펴볼 예정이다.
 그리고 GitHub에 공개된 사전 학습된 모델을 연구실의 로봇 플랫폼에 적용하고 다양한 모듈과 연계하여 실험해 볼 계획인데, 아주 흥미로운 작업이 될 것 같다!
