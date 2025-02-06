@@ -54,12 +54,28 @@ $(function () {
 		var target = el.attr('href');
 		var fullTarget = el.data('target');
 	
-		if (window.location.pathname !== '/' && !window.location.pathname.startsWith('/index.html')) {
-			window.location.href = fullTarget; 
-		} else {
-			top_menu(el);
-		}		
-	});
+    if (window.location.origin + '/' !== window.location.href.split('#')[0]) {
+        sessionStorage.setItem('targetMenu', target);
+        window.location.href = fullTarget;
+        return;
+    }
+
+    top_menu(el);
+});
+
+$(document).ready(function() {
+    var targetMenu = sessionStorage.getItem('targetMenu');
+    if (targetMenu) {
+        sessionStorage.removeItem('targetMenu');
+        var menuItem = $('.top-menu a[href="' + targetMenu + '"]');
+        if (menuItem.length) {
+            setTimeout(function() {
+                top_menu(menuItem);
+            }, 300);
+        }
+    }
+});
+
 
 	function top_menu(el) {
 		/* vars */
