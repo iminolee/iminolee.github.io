@@ -4,7 +4,7 @@ email: "mino@inha.edu"
 description: "Spatial AI and Robotics"
 author: "Minho Lee"
 baseurl: ""
-url: "https://iminolee.github.io"
+url: "http://roboxiv.com"
 date_format: "%b %d, %Y"
 
 # paginations & permalinks
