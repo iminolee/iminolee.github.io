@@ -14,7 +14,15 @@ layout: default
 		<div class="content blog">
 
 			<!-- title -->
-			<div class="title">{{ ui_text.archive }}: {{ page.title }}</div>
+			<div class="title">
+                {% if page.type == "category" %}
+                    Category: {{ page.title }}
+                {% elsif page.type == "tag" %}
+                    Tag: {{ page.title }}
+                {% else %}
+                    Archive: {{ page.title }}
+                {% endif %}
+            </div>
 
 			<!-- content -->
 			<div class="row border-line-v post-items" data-page="{{ paginator.page }}" data-total="{{ paginator.total_pages }}">
