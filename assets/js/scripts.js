@@ -54,11 +54,11 @@ $(function () {
 		var target = el.attr('href');
 		var fullTarget = el.data('target');
 	
-		if (!$('body').hasClass('home')) {
-			window.location.href = fullTarget;
+		if (window.location.pathname !== '/' && !window.location.pathname.startsWith('/index.html')) {
+			window.location.href = fullTarget; 
 		} else {
 			top_menu(el);
-		}
+		}		
 	});
 
 	function top_menu(el) {
