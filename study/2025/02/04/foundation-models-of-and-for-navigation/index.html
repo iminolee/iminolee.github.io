@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Foundation Models of and for Navigation | Minho’s Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Foundation Models of and for Navigation" />
+<meta name="author" content="Minho Lee" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="📌 ICRA 2024 Workshop에서 열린 Vision-Language Models for Navigation and Manipulation (VLMNM)를 주제로 한 invited talk 중에서 ViNT, GNM, NoMaD 논문의 저자인 Dhruv Shah 박사님의 “Foundation Models of and for Navigation” 발표를 정리해보려고 한다." />
+<meta property="og:description" content="📌 ICRA 2024 Workshop에서 열린 Vision-Language Models for Navigation and Manipulation (VLMNM)를 주제로 한 invited talk 중에서 ViNT, GNM, NoMaD 논문의 저자인 Dhruv Shah 박사님의 “Foundation Models of and for Navigation” 발표를 정리해보려고 한다." />
+<link rel="canonical" href="https://roboxiv.com/study/2025/02/04/foundation-models-of-and-for-navigation/" />
+<meta property="og:url" content="https://roboxiv.com/study/2025/02/04/foundation-models-of-and-for-navigation/" />
+<meta property="og:site_name" content="Minho’s Blog" />
+<meta property="og:image" content="https://roboxiv.com/assets/img/thumbnails/blog_1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-02-04T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://roboxiv.com/assets/img/thumbnails/blog_1.png" />
+<meta property="twitter:title" content="Foundation Models of and for Navigation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Minho Lee"},"dateModified":"2025-02-04T00:00:00+00:00","datePublished":"2025-02-04T00:00:00+00:00","description":"📌 ICRA 2024 Workshop에서 열린 Vision-Language Models for Navigation and Manipulation (VLMNM)를 주제로 한 invited talk 중에서 ViNT, GNM, NoMaD 논문의 저자인 Dhruv Shah 박사님의 “Foundation Models of and for Navigation” 발표를 정리해보려고 한다.","headline":"Foundation Models of and for Navigation","image":"https://roboxiv.com/assets/img/thumbnails/blog_1.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://roboxiv.com/study/2025/02/04/foundation-models-of-and-for-navigation/"},"url":"https://roboxiv.com/study/2025/02/04/foundation-models-of-and-for-navigation/"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- Load Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+  <!-- Load CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/ionicons.css" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+  <link rel="stylesheet" href="/assets/css/animate.css" />
+  <link rel="stylesheet" href="/assets/css/owl.carousel.css" />
+  <link rel="stylesheet" href="/assets/css/syntax.css" />
+
+  
+
+  <!-- Template RTL -->
+  
+
+  <!-- Template Colors -->
+  
+  <link rel="stylesheet" href="/assets/css/template-colors/blue.css" />
+  
+
+  <!-- Template Dark -->
+  
+  
+
+  <!--[if lt IE 9]>
+  <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico"><link type="application/atom+xml" rel="alternate" href="https://roboxiv.com/feed.xml" title="Minho&apos;s Blog" /></head><body class=" blog">
+
+    <div class="page new-skin">
+    
+      <!-- preloader -->
+      <div class="preloader">
+        <div class="centrize full-width">
+          <div class="vertical-center">
+            <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- background -->
+      <div class="background gradient">
+        <ul class="bg-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+
+<div class="s_overlay"></div>
+<div class="content-sidebar">
+	<div class="sidebar-wrap">
+		<aside id="secondary" class="widget-area">
+			<div id="search" class="widget widget_search">
+				<form class="search-form" method="GET" action="/search.html">
+					<label>
+						<input type="search" id="search-input" class="search-field" placeholder="Search ..." value="">
+					</label>
+					<input type="submit" class="search-submit" value="">
+					<ul id="results-container"></ul>
+				</form>
+			</div>
+
+			
+			<section class="widget widget_recent_entries">
+				<h2 class="widget-title">Recent Posts</h2>
+				<ul>
+					
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_recent_entries">
+				<h2 class="widget-title">Latest Posts</h2>
+				<ul>
+					
+					<li>
+						<a href="/study/2025/02/04/foundation-models-of-and-for-navigation/">Foundation Models of and for Navigation</a>
+					</li>
+					
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_categories">
+				<h2 class="widget-title">Categories</h2>
+				<ul>
+				
+				  
+				    
+				      <li><a href="/categories/study">Study</a> <small>(1)</small></li>
+				    
+				  
+				
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_tags">
+				<h2 class="widget-title">Tags</h2>
+				<ul>
+				
+				  
+				    
+				      <li><a href="/tags/icra2024">ICRA2024</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/workshop">Workshop</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/foundation-model">Foundation Model</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/robotics">Robotics</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/navigation">Navigation</a> <small>(1)</small></li>
+				    
+				  
+				
+				</ul>
+			</section>
+			
+		</aside>	
+	</div>
+	<span class="close"></span>
+</div>
+      
+
+      <!-- Container -->
+      <div class="container opened" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+
+<!-- Header -->
+<header class="header">
+
+	<a href="#" class="menu-btn"><span></span></a>
+	
+	<!-- menu -->
+	<div class="top-menu">
+		<ul>
+			
+			<li class="active">
+				<a href="#about-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#about-card">
+					<span class="icon ion-person"></span>
+					<span class="link">About</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#resume-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#resume-card">
+					<span class="icon ion-android-list"></span>
+					<span class="link">Resume</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#works-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#works-card">
+					<span class="icon ion-flag"></span>
+					<span class="link">Record</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#blog-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#blog-card">
+					<span class="icon ion-chatbox-working"></span>
+					<span class="link">Blog</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#contacts-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#contacts-card">
+					<span class="icon ion-at"></span>
+					<span class="link">Contact</span>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+
+</header>
+
+<!-- Card - Started -->
+<div class="card-started" id="home-card">
+
+  <!--
+    Profile
+  -->
+  <div class="profile no-photo">
+
+    <!-- profile image -->
+    
+    <div class="slide" style="background-color: #f0f0f0;"></div>
+    
+
+    <!-- profile photo -->
+    
+
+    <!-- profile titles -->
+    <div class="title">Minho Lee</div>
+    <div class="subtitle subtitle-typed">
+      <div class="typing-title">
+        
+        <p>Master's Student</p>
+        
+        <p>Robotics Engineer</p>
+        
+        <p>AI Researcher</p>
+        
+        <p>Blogger</p>
+        
+      </div>
+    </div>
+
+    <!-- profile socials -->
+    <div class="social">
+      
+      <a target="_blank" href="https://github.com/iminolee" title="GitHub"><span class="fab fa-github"></span></a>
+      
+      <a target="_blank" href="https://twitter.com/" title="Twitter"><span class="fab fa-twitter"></span></a>
+      
+    </div>
+    
+    <!-- profile buttons -->
+    <div class="lnks">
+      
+      <a href="https://drive.google.com/" class="lnk">
+        <span class="text">Download CV</span>
+        
+      </a>
+      
+      <a href="mailto:mino@inha.edu" class="lnk">
+        <span class="text">Contact Me</span>
+        
+      </a>
+      
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--
+	Card - Blog
+-->
+<div class="card-inner blog blog-post animated" id="blog-card">
+	<div class="card-wrap">
+
+		<!--
+			Blog Single
+		-->
+		<div class="content blog-single">
+
+			<!-- title -->
+			<div class="title">Blog Post</div>
+
+			<!-- content -->
+			<div class="row border-line-v">
+				<div class="col col-m-12 col-t-12 col-d-12">
+					<div class="post-box">
+						
+						<!-- blog detail -->
+						<h1>Foundation Models of and for Navigation</h1>
+						<div class="blog-detail">
+							<span class="date">Feb 04, 2025</span>
+							
+							
+							<span class="cat-links">
+								
+						        <a href="/categories/study">Study</a>
+						        
+						        
+							</span>
+							
+							<span class="byline"> by <span class="author">Minho Lee</span></span>				
+						</div>
+						
+						
+						<!-- blog image -->
+						<div class="blog-image">
+							<img src="/assets/img/thumbnails/blog_1.png" alt="Foundation Models of and for Navigation" />
+						</div>  
+						
+
+						<!-- blog toc -->
+						
+							<aside class="toc">
+								<h2 class="toc-title">Table of Contents</h2>
+								<ul class="inline_toc" id="my_toc"><li><a href="#1-foundation-models">1. Foundation Models</a></li><li><a href="#2-robot-foundation-model">2. Robot Foundation Model</a></li><li><a href="#3-cross-embodiment-learning">3. Cross-Embodiment Learning</a></li><li><a href="#4-downstream-adaptation">4. Downstream Adaptation</a></li><li><a href="#5-conclusion">5. Conclusion</a></li></ul>
+
+							</aside>
+						
+
+						<!-- blog content -->
+						<div class="blog-content">
+							<p>📌 ICRA 2024 Workshop에서 열린 Vision-Language Models for Navigation and Manipulation (VLMNM)를 주제로 한 invited talk 중에서 ViNT, GNM, NoMaD 논문의 저자인 Dhruv Shah 박사님의 <strong>“Foundation Models of and for Navigation”</strong> 발표를 정리해보려고 한다.</p>
+
+<p>워크숍에 대한 정보와 전체 발표 영상은 아래 링크를 통해 확인할 수 있다. <br /></p>
+<ul>
+  <li><a href="https://vlmnm-workshop.github.io/"> ICRA-24 VLMNM Workshop</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLvYJV1Xnj1YVZdTrP2i8EqJW7Ai_pIMV7"> Recordings of Invited Talks</a></li>
+</ul>
+
+<h3 id="1-foundation-models">1. Foundation Models</h3>
+<p>로봇 분야의 최근의 발전을 보면, 중요한 핵심은 대량의 데이터를 활용한 학습에 있다. 다양한 작업에서 수집된 데이터를 통해 모델이 작업의 패턴을 학습하고 이를 활용하여 여러 작업을 수행할 수 있도록 하는 것이다. 이러한 모델들을 <strong>“Foundation Models”</strong>라고 한다. 일반적으로 이러한 Foundation Model들은 광범위한 데이터셋을 사용하여 자가 지도 학습을 통해 학습되며, 최소한의 지도 학습만으로도 뛰어난 일반화 및 적응 능력을 갖는 것이 특징이다.</p>
+
+<p>이러한 모델들은 “인터넷 기반 모델 (Internet Foundation Models)”이라고 할 수도 있는데, 그 이유는 이런 모델들은 능동적으로 데이터를 수집하는 것이 아니라 인터넷에 존재하는 다양한 데이터들을 활용해 훈련되기 때문이다. 이러한 데이터와 모델의 통합은 data-driven robotics에서 중요한 역할을 할 수 있다.</p>
+
+<p>모델을 훈련할 때 단순히 데이터의 규모만으로 충분한 것은 아니다. 모델의 성능을 높이기 위해서는 데이터의 품질과 다양성에 집중하는 데이터 중심적 접근(Data-centric perspective)이 중요하다. 그러나 이러한 고품질의 그리고 다양한 데이터를 수집하는 것은 매우 어렵고 비용이 많이 드는 문제이다.</p>
+
+<p>이러한 관점에서 Dhruv Shah 박사는 <strong>기존에 존재하는 데이터를 활용하여 데이터 기반 로보틱스를 어떻게 실현할 것인지</strong>에 집중해 왔다. 기존 데이터들은 서로 다른 환경과 다양한 작업에서 수집되어 겉보기에는 매우 이질적으로 보일 수 있다. 그러나 적절한 목표와 구조를 정의하면 이러한 데이터를 효과적으로 활용하여 로봇 간 전이 가능한 유용한 표현을 학습할 수 있음을 보여주었다.</p>
+
+<p align="center"><img src="/assets/img/blog/20250204/fig_1.png" /></p>
+
+<h3 id="2-robot-foundation-model">2. Robot Foundation Model</h3>
+<p>Robot Foundation Model이란 용어는 많은 의미를 포함하고 있으며, 사람들마다 각자 다른 방식으로 이해할 수도 있다. Dhruv Shah 박사는 연구에서 Robot Foundation Model을 한 번 훈련되면 추가적인 지도 학습 없이도 다양한 로봇에서 바로 사용할 수 있는 모델이라 정의하였다. 이는 서로 다른 센서를 가진 로봇, 전혀 다른 환경에 놓인 로봇에서도 새로운 작업을 수행할 수 있도록 설계된 모델을 의미한다. 이를 위해서 모델이 충족해야 하는 주요 조건은 아래와 같다:</p>
+
+<p align="center"><img src="/assets/img/blog/20250204/fig_2.png" /></p>
+
+<p>이러한 모델을 만들기 위해서는 기존의 개별적인 로봇별 학습 방식에서 벗어나, 여러 로봇에서 수집한 데이터를 통합하여 단일한 거대 신경망 모델을 학습하는 방식 (Cross-Embodiment Learning)이 요구된다.</p>
+
+<h3 id="3-cross-embodiment-learning">3. Cross-Embodiment Learning</h3>
+<p>서로 다른 로봇 데이터를 하나의 모델에서 학습시키기 위해서는 특정한 설계 원칙이 필요하다. <br /></p>
+<ul>
+  <li><strong>공통된 행동 공간(action space) 정의</strong>: 각 로봇은 서로 다른 행동 공간(rotor velocities, joint angles …)을 가진다. 따라서, 이를 통합할 수 있는 공통된 표현이 필요하다.</li>
+  <li><strong>로봇의 특성을 반영하는 프롬프트 (Embodiment Prompt)</strong>: 로봇마다 구조나 이동 방식이 다르기 때문에, 모든 로봇에 동일한 방식의 제어 모델을 적용하기 어렵다. 이를 해결하기 위해 로봇의 특성을 명시적인 시스템 파라미터로 직접 학습하는 대신 로봇이 과거에 수행한 행동 데이터를 활용하여 모델이 스스로 로봇의 특성을 학습하도록 하는 접근 방식이 요구된다. 다시 말해, Embodiment Prompt란 로봇의 과거 행동 데이터를 입력으로 제공하여 모델이 해당 로봇의 특성을 자동으로 반영하는 기법을 의미한다.</li>
+</ul>
+
+<p>개별 로봇 데이터만 학습한 모델보다, 여러 로봇의 데이터를 통합해 학습한 모델(GNM, General Navigation Model)이 일관되게 높은 성능을 기록함을 보여주었다. 또한, 개별 로봇에서 학습한 정책보다 다수의 로봇 데이터를 결합한 정책이 더욱 일반화된 성능을 보이며, 모델의 크기가 커질 때에도 성능이 더 크게 향상됨을 보였다.</p>
+
+<ul>
+  <li><a href="https://ieeexplore.ieee.org/abstract/document/10161227?casa_token=UShbqLF5uogAAAAA:s3h6WmqvbkyN8E8lCbVogL2PXPrGoii7FftHRSKsFySo2NEW0aLQb5dF1A2OLe2KZIligpBP"> Shah, Dhruv, et al. “Gnm: A general navigation model to drive any robot.” 2023 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2023.</a></li>
+</ul>
+<p align="center"><img src="/assets/img/blog/20250204/fig_3.gif" /></p>
+
+<h3 id="4-downstream-adaptation">4. Downstream Adaptation</h3>
+<p align="center"><img src="/assets/img/blog/20250204/fig_4.png" /></p>
+
+<p>제안하고 있는 Robot Foundation Model을 기반으로 더 고차원의 기능을 추가하기 위한 연구가 진행되고 있다. 주요 연구 방향은 크게 세 가지로 나뉘는데, 기본적으로 학습된 모델은 단순히 목표 지점에 도달하고 충돌을 회피하는 기능만을 수행한다면 기존 모델에 약간의 추가 데이터와 적절한 보상 함수를 사용해 학습시켜 로봇이 사회적 상호작용이 이루어지는 환경에서 더 나은 행동을 학습할 수 있도록 하는 연구가 진행되고 있다.</p>
+
+<p>두 번째로 기존의 모델이 이미지 기반 목표를 사용했다면, 텍스트 기반 목표 또는 GPS 기반 목표를 적용하는 것이 더 유용할 수 있다고 판단하여 연구가 수행되고 있다. 그러나, 텍스트 기반 목표를 적용하려면 모든 데이터를 텍스트로 annotation해야 하는 문제가 있다. 이를 해결하기 위해 이미지 기반 정책을 학습한 후, GPS 좌표나 명령어를 인코딩하는 새로운 모듈을 추가하는 방식을 사용했다고 한다. 이 방식은 GPT 모델에서 소프트 프롬프팅(Soft Prompting)을 사용하는 방식과 유사하며, 향후 연구에서는 In-context Prompting 방식을 활용해 더욱 효과적인 목표 설정을 탐구할 예정이라고 한다.</p>
+
+<p>마지막으로 대규모의 로봇 데이터셋 구축(Open Cross-Embodiment Collaboration)이 진행 중이다. 연구 결과에서 더 다양한 로봇 데이터를 통합할 수록 Positive Transfer 현상이 발생함을 확인하였으며, 특히 manipulation과 navigation tasks를 함께 정책으로 학습할 경우에 두 작업 모두에서 성능이 개선되는 효과가 나타났다. 이러한 연구를 바탕으로 더 다양한 로봇과 작업 데이터를 동시에 학습하는 하나의 통합된 모델로의 확장 연구가 진행되고 있다고 한다.</p>
+
+<h3 id="5-conclusion">5. Conclusion</h3>
+<p>발표 내용을 요약하면 다음과 같다:</p>
+
+<ul>
+  <li>로봇 분야에서 <u>Foundation Models</u>은 일반적으로 대량의 데이터를 활용하여 로봇이 다양한 작업의 패턴을 학습하고, 이를 통해 여러 작업을 수행 가능하도록 하는 모델을 의미한다.</li>
+  <li>모델을 훈련할 때 데이터의 규모만으로 충분하지 않으며, 데이터의 품질과 다양성에 집중하는 <u>Data-centric Perspective</u>가 중요하다. 하지만, 고품질 데이터를 확보하는 것은 높은 비용과 어려움이 따르는 문제이다.</li>
+  <li>Dhruv Shah 박사는 연구에서 <u>Robot Foundation Model</u>을 추가적인 지도 학습 없이도 다양한 로봇에서 바로 사용 가능하며, 이종 센서나 새로운 환경에서도 적용될 수 있도록 설계된 모델이라 정의했다.</li>
+  <li>위의 모델을 설계하기 위해서는 <u>Cross-Embodiment Learning</u>의 개념이 필요하며, 이는 서로 다른 로봇의 행동 공간을 통합하고 로봇의 특성을 반영하는 프롬프트를 활용하여 모델을 학습하는 방식이다. 이를 통해 개별적인 학습보다, 보다 일관적이고 일반화된 성능을 보인다는 것이 실험적으로 입증되었다.</li>
+  <li>향후 연구에서는 기존 모델에 <u>사회적 보상함수 추가</u>, <u>새로운 모달리티(텍스트/GPS 기반 목표) 적용</u>, <u>더 많은 로봇 모델 및 작업을 학습한 통합 모델로의 확장</u>의 방향이 진행될 것이다.</li>
+</ul>
+
+<p>끝으로, 앞서 언급된 모델 및 관련 프레임워크는 아래 GitHub에서 확인할 수 있다.</p>
+<ul>
+  <li><a href="https://github.com/robodhruv/visualnav-transformer"> Berkeley AI Research &amp; Dhruv Shah Github</a></li>
+</ul>
+
+<p>내가 연구하는 필드에서 Dhruv Shah 박사님의 연구들은 큰 주목을 받았었고, 현재도 많은 관심을 받고 있다. 앞으로도 의미 있는 연구들이 나올 것으로 기대되기 때문에, 계속해서 살펴볼 예정이다.
+그리고 GitHub에 공개된 사전 학습된 모델을 연구실의 로봇 플랫폼에 적용하고 다양한 모듈과 연계하여 실험해 볼 계획인데, 아주 흥미로운 작업이 될 것 같다!</p>
+
+<hr />
+
+						</div>
+
+						<div class="post-text-bottom">	
+							
+							
+							<div class="tags-links">
+								<span>Tags:</span>
+								
+								<a href="/tags/icra2024" rel="tag">ICRA2024</a>
+								
+								<a href="/tags/workshop" rel="tag">Workshop</a>
+								
+								<a href="/tags/foundation-model" rel="tag">Foundation Model</a>
+								
+								<a href="/tags/robotics" rel="tag">Robotics</a>
+								
+								<a href="/tags/navigation" rel="tag">Navigation</a>
+								
+							</div>
+							
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+
+			
+			<!-- title -->
+			<div class="title">Comments</div>
+			
+			<!-- comments -->
+			<div class="row border-line-v">
+				<div class="col col-m-12 col-t-12 col-d-12">
+					<div class="post-box">
+						<div class="col-md-12">
+							<div id="utterances"></div>
+							<script src="https://utteranc.es/client.js"
+									repo="iminolee/iminolee.github.io"
+									issue-term="pathname"
+									label="comment"
+									theme="github-light"
+									crossorigin="anonymous"
+									async>
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			
+		</div>
+
+	</div>
+</div>
+      </div>
+    </div><!-- Plugins -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<script src="/assets/js/imagesloaded.pkgd.js"></script>
+<script src="/assets/js/isotope.pkgd.js"></script>
+<script src="/assets/js/jquery.slimscroll.js"></script>
+<script src="/assets/js/owl.carousel.js"></script>
+<script src="/assets/js/typed.js"></script>
+<script src="/assets/js/rrssb.js"></script>
+<script src="/assets/js/simple-jekyll-search.js"></script>
+
+
+<!-- Google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?key="></script>
+
+
+<!-- Main -->
+<script src="/assets/js/scripts.js"></script></body>
+
+</html>
