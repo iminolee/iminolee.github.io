@@ -47,8 +47,18 @@ $(function () {
 		$('.top-menu li').removeClass('active');
 	}
 
-	$('.top-menu').on('click', 'a', function(){
-		top_menu($(this));
+	$('.top-menu').on('click', 'a', function(e){
+		e.preventDefault();
+	
+		var el = $(this);
+		var target = el.attr('href');
+		var fullTarget = el.data('target');
+	
+		if (!$('body').hasClass('home')) {
+			window.location.href = fullTarget;
+		} else {
+			top_menu(el);
+		}
 	});
 
 	function top_menu(el) {
