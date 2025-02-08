@@ -56,7 +56,7 @@ $ python3 docker/container.py start
 $ python3 docker/container.py enter
 ```
 
-이 환경에서는 Isaac Lab 저장소의 사본을 포함하며, Isaac Sim의 디렉토리와 라이브러리에 대한 액세스가 가능하다. 또한, 컨테이너에서는 호스트 장치의 <mark>IsaacLab</mark> 디렉토리가 바인딩되어 있기 때문에 호스트에서 해당 디렉토리 아래의 파일을 수정하면 Docker 이미지를 다시 빌드할 필요 없이 변경 사항이 컨테이너에 즉시 반영된다.
+이 환경에서는 Isaac Lab 저장소의 사본을 포함하며, Isaac Sim의 디렉토리와 라이브러리에 대한 액세스가 가능하다. 또한, 컨테이너에서는 호스트 장치의 <mark>IsaacLab</mark> 디렉토리가 마운트되어 있기 때문에 호스트에서 해당 디렉토리 아래의 파일을 수정하면 Docker 이미지를 다시 빌드할 필요 없이 변경 사항이 컨테이너에 즉시 반영된다.
 
 ### 3. Training with an RL Agent
 
@@ -92,7 +92,7 @@ $ ./isaaclab.sh -p scripts/reinforcement_learning/sb3/train.py --task Isaac-Cart
 $ ./isaaclab.sh -p scripts/reinforcement_learning/sb3/train.py --task Isaac-Cartpole-v0 --num_envs 64 --headless --video
 ```
 
-저장된 비디오는 <mark>logs/sb3/Isaac-Cartpole-v0/<run-dir>/videos/train</mark> 디렉토리에 저장된다.
+저장된 비디오는 <mark>logs/sb3/Isaac-Cartpole-v0/$run-dir/videos/train</mark> 디렉토리에 저장된다.
 
 3. Interactive execution: 아래 명령어를 통해 실시간으로 에이전트가 시뮬레이션 환경과 상호 작용하며 훈련되고 있는지 확인할 수 있다. 하지만, 시뮬레이션이 화면에 렌더링되므로 훈련 프로세스가 느려질 수 있다. 해결 방법으로 화면 오른쪽 하단에 도킹된 창에서 다른 렌더링 모드 간에 전환할 수 있다.
 
