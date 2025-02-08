@@ -90,7 +90,7 @@
 					<a href="#popup-{{ work.id | replace: '/', '-' }}" class="has-popup-media">
 						<img src="{{ work.image | relative_url }}" alt="" />
 						<span class="info">
-							<span class="ion ion-images"></span>
+							<span class="ion ion-document-text"></span>
 						</span>
 					</a>
 				</div>
@@ -122,6 +122,42 @@
 		</div>
 		{% endif %}
 
+		{% if work.type == 'code' %}
+		<!-- work item code -->
+		<div class="col col-d-6 col-t-6 col-m-12 grid-item {{ work.category_slug }} border-line-h">
+			<div class="box-item">
+				<div class="image">
+					<a href="#popup-{{ work.id | replace: '/', '-' }}" class="has-popup-media">
+						<img src="{{ work.image | relative_url }}" alt="" />
+						<span class="info">
+							<span class="ion ion-document-text"></span>
+						</span>
+					</a>
+				</div>
+				<div class="desc">
+					<a href="#popup-{{ work.id | replace: '/', '-' }}" class="name has-popup-media">{{ work.title }}</a>
+					<div class="category">{{ work.category }}</div>
+				</div>
+				<div id="popup-{{ work.id | replace: '/', '-' }}" class="popup-box mfp-fade mfp-hide">
+					<div class="content">
+						<div class="image">
+							<img src="{{ work.image | relative_url }}" alt="">
+						</div>
+						<div class="desc">
+							<div class="post-box">
+								<h1>{{ work.title }}</h1>						
+								<div class="blog-detail">{{ work.category }}</div>
+								<div class="blog-content">
+									{{ work.content }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		
 		{% endfor %}
 
 		<div class="clear"></div>

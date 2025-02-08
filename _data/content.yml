@@ -227,34 +227,30 @@ skills:
 
 ### Portfolio [ portfolio ]
 portfolio:
-  title: "Dashboard"
+  title: "Archive"
   filters:
     - name: "All"
       slug: "grid-item"
       active: 1
 
-# Active Projects, Completed Projects, Planned Projects etc.
-    - name: "Projects"
+    - name: "Paper"
+      slug: "paper"
+      active: 0
+
+    - name: "Photo"
       slug: "photo"
       active: 0
 
-# Research Focus, Skill Development etc.
-    - name: "Areas"
+    - name: "Video"
       slug: "video"
       active: 0
 
-# Papers&Readings, Tools&Frameworks, Dataset References, Tutorials&Guides etc.
-    - name: "Resources"
-      slug: "music"
+    - name: "Code"
+      slug: "code"
       active: 0
 
-# Conference Logs, Experiments Logs, Past Achievements etc.
-    - name: "Archives"
-      slug: "music"
-      active: 0
-
-#     - name: "Design"
-#       slug: "design"
+#     - name: "Music"
+#       slug: "music"
 #       active: 0
 
 ### Blog [ blog ]

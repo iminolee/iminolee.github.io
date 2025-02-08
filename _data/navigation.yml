@@ -28,8 +28,8 @@ main:
         - skills
 
   #works card
-  - title: "Record"
-    icon: "flag"
+  - title: "Archive"
+    icon: "images"
     slug: "works"
     sections:
         - portfolio
