@@ -29,7 +29,7 @@ facts:
       name: "365 Days of Fitness"
 
     - icon: "star"
-      name: "50+ Stars on GitHub"
+      name: "100+ Stars on GitHub"
 
     - icon: "trophy"
       name: "4 Awards Won"
@@ -67,7 +67,7 @@ services:
 
 ### Clients [ clients ]
 clients:
-  title: "Project Previews"
+  title: "Projects"
   items:
     - url: "https://www.youtube.com/watch?v=ryRLNU31uVk&list=PL9K1wJin-si8gp3EvcwTxwC9IR75M9jiP"
       image: "assets/img/projects/project_1.png"
@@ -89,6 +89,11 @@ clients:
 testimonials:
   title: "News"
   items:
+    - image: "assets/img/news/kros2024.png"
+      name: "Training Object detection model with Synthetic data in Logistic Environments"
+      subname: "Jiyun Lee, Wonhyeok Jeong, Chohui Shin, Jehwan Jeon, <b>Minho Lee</b>, Jinyong Jeong and Younggun Cho"
+      text: "[2025.02] Received the Asian Federation of Computer Vision (AFCV) Outstanding Paper Award!"
+
     - image: "assets/img/news/swcontest.png"
       name: "Minister of Trade, Industry and Energey Award"
       subname: "Jungwoo Lee, <b>Minho Lee</b>, Gihyeon Lee, Dongjin Cho"
@@ -164,9 +169,9 @@ publication:
     - type: "conference"
       year: "2025.02"
       title: "Training Object detection model with Synthetic data in Logistic Environments"
-      author: "Jiyun Lee, Wonhyeok Jeong, Chohui Shin, Jehwan Jeon, <b>Minho Lee</b>, Jinyong Jeong and Younggun Cho"
-      venue: "In Proceedings of the 20th Korea Robotics Society Annual Conference (KRoC), 2025"
-      link: 
+      author: "🏆 <b>Asian Federation of Computer Vision(AFCV) Outstanding Paper Award</b><br>Jiyun Lee, Wonhyeok Jeong, Chohui Shin, Jehwan Jeon, <b>Minho Lee</b>, Jinyong Jeong and Younggun Cho"
+      venue: "The 20th Korea Robotics Society Annual Conference (KRoC), 2025"
+      link: https://github.com/iminolee/IsaacSim-Autonomous-Forklift
 
     - type: "conference"
       year: "2024.08"
@@ -179,14 +184,14 @@ publication:
       year: "2024.02"
       title: "Localization method for Autonomous Driving in urban GPS-shading area based on ICP algorithm"
       author: "<b>Minho Lee</b>, Gihyeon Lee, Miryeong Park, Jiyun Lee, Jaeyong Lee and Younggun Cho"
-      venue: "In Proceedings of the 19th Korea Robotics Society Annual Conference (KRoC), 2024"
+      venue: "The 19th Korea Robotics Society Annual Conference (KRoC), 2024"
       link: "https://sites.google.com/inha.edu/sparolab/home"
 
     - type: "conference"
       year: "2024.02"
       title: "Simplified Optimal Path Selection Algorithm Based on Lattice Planner for Autonomous Vehicles"
       author: "Miryeong Park, Jaeyong Lee, Jiyun Lee, <b>Minho Lee</b>, Gihyeon Lee and Younggun Cho"
-      venue: "In Proceedings of the 19th Korea Robotics Society Annual Conference (KRoC), 2024"
+      venue: "The 19th Korea Robotics Society Annual Conference (KRoC), 2024"
       link: "https://sites.google.com/inha.edu/vi2re-planning-kros-conference/introduction"
 
 ### Skills [ skills ]
