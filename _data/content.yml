@@ -5,7 +5,7 @@ about:
   title: "About Me"
   text: "
         <p>
-          <strong>Hello! I’m Minho Lee.</strong><br> Master's student at Inha University in Incheon, South Korea.<br> My research interests focus on advancing the integration of AI and Robotics to address complex real-world challenges. I hope to share ideas about the future of AI-driven robotic society with you.
+          <strong>Hello! I’m Minho Lee.</strong><br> Master's student at Inha University in Incheon, South Korea.<br> My research focuses on enhancing AI-Robotics integration to solve complex real-world challenges.<br> I hope to share ideas about the future of AI-driven robotic society with you.
         </p>
         "
   list:
@@ -15,11 +15,11 @@ about:
     - label: "Address"
       value: "Incheon, South Korea"
 
-    - label: "Department"
-      value: "Electrical and Computer Engineering, SPARO Lab"
+    - label: "Affiliation"
+      value: "SPARO Lab, <br> Inha University"
 
     - label: "Keywords"
-      value: "Spatial Intelligence<br> Vision-Language Action Planning<br> LiDAR SLAM"
+      value: "Embodied AI<br> LiDAR SLAM"
 
 ### Facts [ facts ]
 facts:
@@ -129,14 +129,14 @@ resume:
       - year: "2024 - Present"
         role: "Inha University @SPARO Lab."
         company: "Incheon, South Korea"
-        text: "<b>M.S in Electrical and Computer Engineering</b>. Conducting research on Vision-Language Action Planning for Robotics. The research focuses on multi-modal reasoning, VLM/LLMs-based robot navigation, and human-robot interaction"
+        text: "M.S. in Electrical and Computer Engineering"
         active: 1
         h_line: 1
 
       - year: "2016 - 2023"
         role: "Inha University"
         company: "Incheon, South Korea"
-        text: "<b>B.S in Electrical Engineering</b>, focused on Automotive Sensor Technologies and Power Systems."
+        text: "B.S. in Electrical Engineering"
         active: 0
         h_line: 1
 
