@@ -1173,20 +1173,29 @@
 	<div class="title">Contact Form</div>
 	
 
+	<!-- Add responsive styles -->
+	<style>
+		@media (max-width: 768px) {
+			.contact_form .row .col-m-6 {
+				width: 100%;
+			}
+		}
+		</style>
+
 	<!-- content -->
 	<div class="row">
 		<div class="col col-d-12 col-t-12 col-m-12 border-line-v">
 			<div class="contact_form">
-				<form id="cform" action="https://formsubmit.io/send/" method="POST">
+				<form id="cform" action="https://formsubmit.io/send/mino@inha.edu" method="POST">
 					<input name="_formsubmit_id" type="text" style="display:none">
 
 					<div class="row">
-						<div class="col col-d-6 col-t-6 col-m-12">
+						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
 								<input type="text" name="name" placeholder="Full Name" id="name" />
 							</div>
 						</div>
-						<div class="col col-d-6 col-t-6 col-m-12">
+						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
 								<input type="text" name="email" placeholder="Email Address" id="email" />
 							</div>
