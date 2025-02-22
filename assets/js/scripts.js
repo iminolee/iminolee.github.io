@@ -401,7 +401,7 @@ $(document).ready(function() {
 		margin: 0,
 		items: 1,
 		autoplay: true,
-		autoplayTimeout: 2000,
+		autoplayTimeout: 3000,
 		autoplayHoverPause: true,
 		loop: true,
 		rewind: false,
