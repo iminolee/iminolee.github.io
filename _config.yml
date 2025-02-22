@@ -21,7 +21,7 @@ utterances_comments: "yes"
 utterances_repo: "iminolee/iminolee.github.io"
 
 # formsubmit.io
-# formsubmit_email: ""
+formsubmit_email: "mino@inha.edu"
 
 # google maps
 # google_maps_api_key: "" #google maps api key

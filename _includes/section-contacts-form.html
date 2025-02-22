@@ -9,6 +9,15 @@
 	<div class="title">{{ content.title }}</div>
 	{{ endif }}
 
+	<!-- Add responsive styles -->
+	<style>
+		@media (max-width: 768px) {
+			.contact_form .row .col-m-6 {
+				width: 100%;
+			}
+		}
+		</style>
+
 	<!-- content -->
 	<div class="row">
 		<div class="col col-d-12 col-t-12 col-m-12 border-line-v">
@@ -17,12 +26,12 @@
 					<input name="_formsubmit_id" type="text" style="display:none">
 
 					<div class="row">
-						<div class="col col-d-6 col-t-6 col-m-12">
+						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
 								<input type="text" name="name" placeholder="{{ ui_text.full_name }}" id="name" />
 							</div>
 						</div>
-						<div class="col col-d-6 col-t-6 col-m-12">
+						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
 								<input type="text" name="email" placeholder="{{ ui_text.email_address }}" id="email" />
 							</div>
