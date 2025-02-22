@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Isaac Lab Tutorial #2 - Interacting with Objects"
-date: 2025-02-23
+date: 2025-02-22
 category:
   - Simulation
 image: /assets/img/thumbnails/blog_3.png
