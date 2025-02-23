@@ -9,51 +9,42 @@
 	<div class="title">{{ content.title }}</div>
 	{{ endif }}
 
-	<!-- Add responsive styles -->
-	<style>
-		@media (max-width: 560px) {
-			.contact_form .row {
-				display: flex;
-				flex-wrap: wrap;
-			}
-			
-			.contact_form .row .col-m-6 {
-				width: 100% !important;
-				display: block !important;
-			}
-		}
-		</style>
-		
-
 	<!-- content -->
 	<div class="row">
 		<div class="col col-d-12 col-t-12 col-m-12 border-line-v">
 			<div class="contact_form">
-				<form id="cform" action="https://formsubmit.io/send/{{ site.formsubmit_email }}" method="POST">
+				<form id="cform" action="https://formspree.io/f/{{ site.formsubmit_email }}" method="POST">
 					<input name="_formsubmit_id" type="text" style="display:none">
-
 					<div class="row">
+
+						<!-- Full Name -->
 						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
-								<input type="text" name="name" placeholder="{{ ui_text.full_name }}" id="name" />
+								<label for="name">{{ ui_text.full_name }}</label>
+								<input type="text" name="name" id="name" placeholder="{{ ui_text.full_name }}" required />
 							</div>
 						</div>
+						<!-- Email Address -->
 						<div class="col col-d-6 col-t-6 col-m-6">
 							<div class="group-val">
-								<input type="text" name="email" placeholder="{{ ui_text.email_address }}" id="email" />
+								<label for="email">{{ ui_text.email_address }}</label>
+								<input type="text" name="email" id="email" placeholder="{{ ui_text.email_address }}" required />
 							</div>
 						</div>
+						<!-- Message -->
 						<div class="col col-d-12 col-t-12 col-m-12">
 							<div class="group-val">
-								<textarea name="message" placeholder="{{ ui_text.your_message }}" id="message"></textarea>
+								<label for="message">{{ ui_text.your_message }}</label>
+								<textarea name="message" placeholder="{{ ui_text.your_message }}" id="message" required></textarea>
 							</div>
 						</div>
 					</div>
+					<!-- Submit Button -->
 					<div class="align-left">
-						<a href="#" class="button" onclick="$('#cform').submit(); return false;">
+						<button type="submit" class="button">
 							<span class="text">{{ ui_text.send_message }}</span>
 							<span class="arrow"></span>
-						</a>
+						</button>
 					</div>
 				</form>
 			</div>
