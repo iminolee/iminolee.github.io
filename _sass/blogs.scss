@@ -344,10 +344,13 @@
 
 .toc {
 	width: 60%;
-	padding: 15px;
-	font-size: 1.0rem;
-	border: 1px solid #ccc;
-	background-color: #f9f9f9;
+	padding: 20px 25px;
+	text-align: left;
+	font-size: 1rem;
+	border-radius: 12px;
+	border: 1px solid #e0d9e7;
+	background-color: #ffffff;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 	margin: 0 auto;
 	margin-bottom: 20px;
   }
@@ -366,15 +369,26 @@
   
   .toc li {
 	margin: 5px 0;
+	position: relative;
+	padding-left: 10px;
   }
-  
+
   .toc a {
+	display: inline-block;
 	text-decoration: none;
 	color: #333;
+	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   }
   
   .toc a:hover {
 	color: #007acc;
+	transform: translateX(5px);
   }
+
+  @media (max-width: 560px) {
+	.toc {
+		width: 95%;
+	}
+}
 
 }
