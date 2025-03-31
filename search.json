@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Installing ChatGPT and Claude Desktop Application on Ubuntu",
+      "category" : "Ubuntu",
+      "tags"     : "LLM, Linux, ChatGPT, Claude",
+      "url"      : "/ubuntu/2025/03/31/gpt-claude-desktop-linux/",
+      "date"     : "2025-03-31 00:00:00 +0000"
+    } ,
+  
+    {
       "title"    : "Isaac Lab Tutorial #2 - Create the Scene",
       "category" : "Simulation",
       "tags"     : "Robotics, Isaac Lab, Isaac Sim",

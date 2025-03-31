@@ -1,4 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://roboxiv.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://roboxiv.com/" rel="alternate" type="text/html" /><updated>2025-03-16T10:14:01+00:00</updated><id>https://roboxiv.com/feed.xml</id><title type="html">Minho’s Blog</title><subtitle>Spatial AI and Robotics</subtitle><author><name>Minho Lee</name></author><entry><title type="html">Isaac Lab Tutorial #2 - Create the Scene</title><link href="https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/" rel="alternate" type="text/html" title="Isaac Lab Tutorial #2 - Create the Scene" /><published>2025-02-23T00:00:00+00:00</published><updated>2025-02-23T00:00:00+00:00</updated><id>https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects</id><content type="html" xml:base="https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/"><![CDATA[<table>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://roboxiv.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://roboxiv.com/" rel="alternate" type="text/html" /><updated>2025-03-31T16:25:23+00:00</updated><id>https://roboxiv.com/feed.xml</id><title type="html">Minho’s Blog</title><subtitle>Spatial AI and Robotics</subtitle><author><name>Minho Lee</name></author><entry><title type="html">Installing ChatGPT and Claude Desktop Application on Ubuntu</title><link href="https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/" rel="alternate" type="text/html" title="Installing ChatGPT and Claude Desktop Application on Ubuntu" /><published>2025-03-31T00:00:00+00:00</published><updated>2025-03-31T00:00:00+00:00</updated><id>https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux</id><content type="html" xml:base="https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/"><![CDATA[<p>💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다.
+그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 <strong>ChatGPT</strong>와 <strong>Claude</strong>인 것 같다.
+대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 <strong>Desktop Application</strong>을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다.</p>
+
+<h3 id="1-chatgpt-desktop-application">1. ChatGPT Desktop Application</h3>
+<h4 id="11-installation-via-snap">1.1. Installation via Snap</h4>
+<p>Linux의 소프트웨어 배포 시스템인 <mark>Snap</mark>을 통해 설치하는 방법이다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>snapd
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>snap <span class="nb">install </span>chatgpt-desktop
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>chatgpt-desktop
+</code></pre></div></div>
+<ul>
+  <li>실행 결과</li>
+</ul>
+<p align="center"><img src="/assets/img/blog/20250331/fig_1.png" /></p>
+
+<ul>
+  <li>macOS나 Windows 환경의 경우 <a href="https://openai.com/chatgpt/desktop/">OpenAI 공식 사이트</a>를 통해 간단하게 설치할 수 있다.</li>
+</ul>
+
+<h4 id="12-installation-via-deb-package">1.2. Installation via .deb Package</h4>
+
+<p>ChatGPT Desktop Application을 제공하는 GitHub 프로젝트에서 .deb 패키지를 다운로드하여 설치하는 방법도 있다.</p>
+
+<p>아래 URL로 이동하면 최근 릴리즈된 버전의 여러 패키지들을 확인할 수 있다.</p>
+
+<blockquote>
+  <p>🔗 <a href="https://github.com/lencx/ChatGPT/releases">https://github.com/lencx/ChatGPT/releases</a></p>
+</blockquote>
+
+<p align="center"><img src="/assets/img/blog/20250331/fig_2.png" /></p>
+
+<p>여기서 Ubuntu 시스템에서 설치하기 위해 <mark>ChatGPT_1.1.0_linux_x86_64.deb</mark> 파일을 다운로드한다.&lt;/br&gt;
+다운로드한 .deb 패키지 파일을 마우스 오른쪽 버튼으로 클릭하고, 다른 응용 프로그램으로 열기 옵션에서 <strong>소프트웨어 설치 옵션</strong>을 선택한다.&lt;/br&gt;
+소프트웨어 설치 페이지가 나타나면 설치 버튼을 눌러 설치를 진행하고, 설치가 완료되면 Desktop Application이 설치된 것을 확인할 수 있다.</p>
+
+<h3 id="2-claude-desktop-application">2. Claude Desktop Application</h3>
+<h4 id="21-installation-via-deb-package">2.1. Installation via .deb Package</h4>
+<p>Linux에서 Claude Desktop을 네이티브로 실행하기 위한 작업<a href="https://github.com/k3d3/claude-desktop-linux-flake">(k3d3/claude-desktop-linux-flake)</a>에서 파생된 GitHub Repository에서 제공해주는 Build Script를 통해 설치를 진행하는 방법을 소개한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/aaddrick/claude-desktop-debian.git
+</code></pre></div></div>
+
+<p>패키지를 빌드하기 전에 <mark>Node.js &gt;= 12.0.0 and npm</mark> 버전이 요구되기 때문에 버전 업데이트를 진행해준다.
+아래는 이미 설치된 버전이 요구하는 버전을 만족하는지 확인하는 방법부터 소개한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check whether the installed Node.js and npm versions meet the minimum requirement</span>
+<span class="nv">$ </span>node <span class="nt">-v</span>
+v10.19.0
+<span class="nv">$ </span>npm <span class="nt">-v</span>
+6.14.4
+
+<span class="c"># If your versions are too old, install the latest Node.js LTS version.</span>
+<span class="c"># npm will be installed automatically along with Node.js.</span>
+<span class="nv">$ </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_18.x | <span class="nb">sudo</span> <span class="nt">-E</span> bash -
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> nodejs
+
+<span class="nv">$ </span>node <span class="nt">-v</span>
+v18.19.0
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>claude-desktop-debian
+
+<span class="c"># Run the build script to generate a Debian package</span>
+<span class="nv">$ </span><span class="nb">sudo</span> ./build-deb.sh
+
+✓ Package built successfully at: /home/user/claude-desktop-debian/build/claude-desktop_0.9.0_amd64.deb
+🎉 Done! You can now <span class="nb">install </span>the package with: <span class="nb">sudo </span>dpkg <span class="nt">-i</span> /home/user/claude-desktop-debian/build/claude-desktop_0.9.0_amd64.deb
+
+<span class="c"># Replace ${VERSION} with the version printed by the build script</span>
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> ./build/claude-desktop_<span class="k">${</span><span class="nv">VERSION</span><span class="k">}</span>_amd64.deb
+
+<span class="nv">$ </span><span class="nb">sudo </span>dpkg <span class="nt">-i</span> ./build/claude-desktop_0.9.0_amd64.deb
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>claude-desktop
+</code></pre></div></div>
+
+<ul>
+  <li>실행 결과</li>
+</ul>
+<p align="center"><img src="/assets/img/blog/20250331/fig_3.png" /></p>
+
+<p>이 Desktop Application에서는 최근 AI 트렌드에서 주목받고 있는 키워드 중 하나인 Claude의 <strong>MCP (Model Context Protocol</strong>)도 지원한다.&lt;/br&gt;
+MCP의 구성 파일은 <mark>~/.config/Claude/claude_desktop_config.json</mark> 경로에 위치하고 있다. (<strong>MCP</strong>에 대해서는 곧 자세히 다뤄볼 예정이다.)</p>
+
+<h3 id="3-coming-up-next">3. Coming up next…</h3>
+<p>앞서 소개한 ChatGPT와 Claude의 Desktop Application은 웹 서버를 통해 동작하기 때문에 인터넷 연결이 필수적이다.&lt;/br&gt;
+다음 글에서는 <strong>DeepSeek, Llama, Phi, Mistral, Gemma 등</strong>과 같은 <strong>오픈소스 LLM</strong>을 로컬 머신에 설치하고, 인터넷 연결 없이 사용할 수 있는 방법에 대해서 알아보도록 하자.</p>
+
+<hr />]]></content><author><name>Minho Lee</name></author><category term="[&quot;Ubuntu&quot;]" /><category term="LLM" /><category term="Linux" /><category term="ChatGPT" /><category term="Claude" /><summary type="html"><![CDATA[💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다. 그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 ChatGPT와 Claude인 것 같다. 대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 Desktop Application을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://roboxiv.com/assets/img/thumbnails/blog_4.png" /><media:content medium="image" url="https://roboxiv.com/assets/img/thumbnails/blog_4.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Isaac Lab Tutorial #2 - Create the Scene</title><link href="https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/" rel="alternate" type="text/html" title="Isaac Lab Tutorial #2 - Create the Scene" /><published>2025-02-23T00:00:00+00:00</published><updated>2025-02-23T00:00:00+00:00</updated><id>https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects</id><content type="html" xml:base="https://roboxiv.com/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/"><![CDATA[<table>
   <thead>
     <tr>
       <th>Previous Tutorial</th>

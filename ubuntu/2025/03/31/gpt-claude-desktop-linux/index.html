@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Installing ChatGPT and Claude Desktop Application on Ubuntu | Minho’s Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Installing ChatGPT and Claude Desktop Application on Ubuntu" />
+<meta name="author" content="Minho Lee" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다. 그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 ChatGPT와 Claude인 것 같다. 대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 Desktop Application을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다." />
+<meta property="og:description" content="💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다. 그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 ChatGPT와 Claude인 것 같다. 대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 Desktop Application을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다." />
+<link rel="canonical" href="https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/" />
+<meta property="og:url" content="https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/" />
+<meta property="og:site_name" content="Minho’s Blog" />
+<meta property="og:image" content="https://roboxiv.com/assets/img/thumbnails/blog_4.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-31T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://roboxiv.com/assets/img/thumbnails/blog_4.png" />
+<meta property="twitter:title" content="Installing ChatGPT and Claude Desktop Application on Ubuntu" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Minho Lee"},"dateModified":"2025-03-31T00:00:00+00:00","datePublished":"2025-03-31T00:00:00+00:00","description":"💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다. 그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 ChatGPT와 Claude인 것 같다. 대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 Desktop Application을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다.","headline":"Installing ChatGPT and Claude Desktop Application on Ubuntu","image":"https://roboxiv.com/assets/img/thumbnails/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/"},"url":"https://roboxiv.com/ubuntu/2025/03/31/gpt-claude-desktop-linux/"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- Load Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+  <!-- Load CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/ionicons.css" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+  <link rel="stylesheet" href="/assets/css/animate.css" />
+  <link rel="stylesheet" href="/assets/css/owl.carousel.css" />
+  <link rel="stylesheet" href="/assets/css/syntax.css" />
+
+  
+
+  <!-- Template RTL -->
+  
+
+  <!-- Template Colors -->
+  
+  <link rel="stylesheet" href="/assets/css/template-colors/blue.css" />
+  
+
+  <!-- Template Dark -->
+  
+  
+
+  <!--[if lt IE 9]>
+  <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico"><link type="application/atom+xml" rel="alternate" href="https://roboxiv.com/feed.xml" title="Minho&apos;s Blog" /></head><body class=" blog">
+
+    <div class="page new-skin">
+    
+      <!-- preloader -->
+      <div class="preloader">
+        <div class="centrize full-width">
+          <div class="vertical-center">
+            <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- background -->
+      <div class="background gradient">
+        <ul class="bg-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+
+<div class="s_overlay"></div>
+<div class="content-sidebar">
+	<div class="sidebar-wrap">
+		<aside id="secondary" class="widget-area">
+			<div id="search" class="widget widget_search">
+				<form class="search-form" method="GET" action="/search.html">
+					<label>
+						<input type="search" id="search-input" class="search-field" placeholder="Search ..." value="">
+					</label>
+					<input type="submit" class="search-submit" value="">
+					<ul id="results-container"></ul>
+				</form>
+			</div>
+
+			
+			<section class="widget widget_recent_entries">
+				<h2 class="widget-title">Recent Posts</h2>
+				<ul>
+					
+					<li>
+						<a href="/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/">Isaac Lab Tutorial #2 - Create the Scene</a>
+					</li>
+					
+					<li>
+						<a href="/simulation/2025/02/08/isaaclab-tutorial-intro/">Isaac Lab Tutorial #1 - Introduction</a>
+					</li>
+					
+					<li>
+						<a href="/study/2025/02/04/foundation-models-of-and-for-navigation/">Foundation Models of and for Navigation</a>
+					</li>
+					
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_recent_entries">
+				<h2 class="widget-title">Latest Posts</h2>
+				<ul>
+					
+					<li>
+						<a href="/ubuntu/2025/03/31/gpt-claude-desktop-linux/">Installing ChatGPT and Claude Desktop Application on Ubuntu</a>
+					</li>
+					
+					<li>
+						<a href="/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/">Isaac Lab Tutorial #2 - Create the Scene</a>
+					</li>
+					
+					<li>
+						<a href="/simulation/2025/02/08/isaaclab-tutorial-intro/">Isaac Lab Tutorial #1 - Introduction</a>
+					</li>
+					
+					<li>
+						<a href="/study/2025/02/04/foundation-models-of-and-for-navigation/">Foundation Models of and for Navigation</a>
+					</li>
+					
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_categories">
+				<h2 class="widget-title">Categories</h2>
+				<ul>
+				
+				  
+				    
+				      <li><a href="/categories/study">Study</a> <small>(1)</small></li>
+				    
+				      <li><a href="/categories/simulation">Simulation</a> <small>(2)</small></li>
+				    
+				      <li><a href="/categories/ubuntu">Ubuntu</a> <small>(1)</small></li>
+				    
+				  
+				
+				</ul>
+			</section>
+			
+
+			
+			<section class="widget widget_tags">
+				<h2 class="widget-title">Tags</h2>
+				<ul>
+				
+				  
+				    
+				      <li><a href="/tags/icra2024">ICRA2024</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/workshop">Workshop</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/foundation-model">Foundation Model</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/robotics">Robotics</a> <small>(3)</small></li>
+				    
+				      <li><a href="/tags/navigation">Navigation</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/isaac-lab">Isaac Lab</a> <small>(2)</small></li>
+				    
+				      <li><a href="/tags/isaac-sim">Isaac Sim</a> <small>(2)</small></li>
+				    
+				      <li><a href="/tags/llm">LLM</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/linux">Linux</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/chatgpt">ChatGPT</a> <small>(1)</small></li>
+				    
+				      <li><a href="/tags/claude">Claude</a> <small>(1)</small></li>
+				    
+				  
+				
+				</ul>
+			</section>
+			
+		</aside>	
+	</div>
+	<span class="close"></span>
+</div>
+      
+
+      <!-- Container -->
+      <div class="container opened" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+
+<!-- Header -->
+<header class="header">
+
+	<a href="#" class="menu-btn"><span></span></a>
+	
+	<!-- menu -->
+	<div class="top-menu">
+		<ul>
+			
+			<li class="active">
+				<a href="#about-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#about-card">
+					<span class="icon ion-person"></span>
+					<span class="link">About</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#resume-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#resume-card">
+					<span class="icon ion-android-list"></span>
+					<span class="link">Resume</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#works-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#works-card">
+					<span class="icon ion-images"></span>
+					<span class="link">Archive</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#blog-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#blog-card">
+					<span class="icon ion-chatbox-working"></span>
+					<span class="link">Blog</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#contacts-card" 
+				   class="menu-link" 
+				   data-target="https://roboxiv.com/#contacts-card">
+					<span class="icon ion-at"></span>
+					<span class="link">Contact</span>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+
+</header>
+
+<!-- Card - Started -->
+<div class="card-started" id="home-card">
+
+  <!--
+    Profile
+  -->
+  <div class="profile no-photo">
+
+    <!-- profile image -->
+    
+    <div class="slide" style="background-color: #f0f0f0;"></div>
+    
+
+    <!-- profile photo -->
+    
+
+    <!-- profile titles -->
+    <div class="title">Minho Lee</div>
+    <div class="subtitle subtitle-typed">
+      <div class="typing-title">
+        
+        <p>Master's Student</p>
+        
+        <p>Robotics Engineer</p>
+        
+        <p>AI Researcher</p>
+        
+        <p>Blogger</p>
+        
+      </div>
+    </div>
+
+    <!-- profile socials -->
+    <div class="social">
+      
+      <a target="_blank" href="https://github.com/iminolee" title="GitHub"><span class="fab fa-github"></span></a>
+      
+      <a target="_blank" href="https://www.linkedin.com/in/iminolee/" title="LinkedIn"><span class="fab fa-linkedin"></span></a>
+      
+      <a target="_blank" href="https://scholar.google.com/citations?user=96AEAd0AAAAJ&hl=ko" title="Google Scholar"><span class="fas fa-graduation-cap"></span></a>
+      
+    </div>
+    
+    <!-- profile buttons -->
+    <div class="lnks">
+      
+      <a href="https://drive.google.com/" class="lnk">
+        <span class="text">Download CV</span>
+        
+      </a>
+      
+      <a href="mailto:mino@inha.edu" class="lnk">
+        <span class="text">Contact Me</span>
+        
+      </a>
+      
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--
+	Card - Blog
+-->
+<div class="card-inner blog blog-post animated" id="blog-card">
+	<div class="card-wrap">
+
+		<!--
+			Blog Single
+		-->
+		<div class="content blog-single">
+
+			<!-- title -->
+			<div class="title">Blog Post</div>
+
+			<!-- content -->
+			<div class="row border-line-v">
+				<div class="col col-m-12 col-t-12 col-d-12">
+					<div class="post-box">
+						
+						<!-- blog detail -->
+						<h1>Installing ChatGPT and Claude Desktop Application on Ubuntu</h1>
+						<div class="blog-detail">
+							<span class="date">Mar 31, 2025</span>
+							
+							
+							<span class="cat-links">
+								
+						        <a href="/categories/ubuntu">Ubuntu</a>
+						        
+						        
+							</span>
+							
+							<span class="byline"> by <span class="author">Minho Lee</span></span>				
+						</div>
+						
+						
+						<!-- blog image -->
+						<div class="blog-image">
+							<img src="/assets/img/thumbnails/blog_4.png" alt="Installing ChatGPT and Claude Desktop Application on Ubuntu" />
+						</div>  
+						
+
+						<!-- blog toc -->
+						
+							<aside class="toc">
+								<h2 class="toc-title">Table of Contents</h2>
+								<ul class="inline_toc" id="my_toc"><li><a href="#1-chatgpt-desktop-application">1. ChatGPT Desktop Application</a><ul><li><a href="#11-installation-via-snap">1.1. Installation via Snap</a></li><li><a href="#12-installation-via-deb-package">1.2. Installation via .deb Package</a></li></ul></li><li><a href="#2-claude-desktop-application">2. Claude Desktop Application</a><ul><li><a href="#21-installation-via-deb-package">2.1. Installation via .deb Package</a></li></ul></li><li><a href="#3-coming-up-next">3. Coming up next…</a></li></ul>
+
+							</aside>
+						
+
+						<!-- blog content -->
+						<div class="blog-content">
+							<p>💡 요즘 다양한 LLM(Large Language Model)이 생겨나면서 각 모델마다 가진 강점에 맞춰 여러 영역에서 활용하고 있다.
+그 중에서 내가 일상적으로 가장 자주 사용하는 모델을 꼽자면 <strong>ChatGPT</strong>와 <strong>Claude</strong>인 것 같다.
+대부분 이런 모델들을 사용할 때 Chrome과 같은 웹 브라우저를 통해 접근하는데, 작업을 계속하다 보면 브라우저 탭이 점점 많아져서 관리가 번거로워지게 된다. 이런 불편함을 해소하기 위해 나는 주로 작업하는 Ubuntu 환경에서 웹브라우저 없이 실행할 수 있는 <strong>Desktop Application</strong>을 설치해 사용할 수 있는 방법을 찾게 되었고, 이번 포스팅에서는 그 과정을 쉽게 따라할 수 있도록 정리해보려고 한다.</p>
+
+<h3 id="1-chatgpt-desktop-application">1. ChatGPT Desktop Application</h3>
+<h4 id="11-installation-via-snap">1.1. Installation via Snap</h4>
+<p>Linux의 소프트웨어 배포 시스템인 <mark>Snap</mark>을 통해 설치하는 방법이다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>snapd
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>snap <span class="nb">install </span>chatgpt-desktop
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>chatgpt-desktop
+</code></pre></div></div>
+<ul>
+  <li>실행 결과</li>
+</ul>
+<p align="center"><img src="/assets/img/blog/20250331/fig_1.png" /></p>
+
+<ul>
+  <li>macOS나 Windows 환경의 경우 <a href="https://openai.com/chatgpt/desktop/">OpenAI 공식 사이트</a>를 통해 간단하게 설치할 수 있다.</li>
+</ul>
+
+<h4 id="12-installation-via-deb-package">1.2. Installation via .deb Package</h4>
+
+<p>ChatGPT Desktop Application을 제공하는 GitHub 프로젝트에서 .deb 패키지를 다운로드하여 설치하는 방법도 있다.</p>
+
+<p>아래 URL로 이동하면 최근 릴리즈된 버전의 여러 패키지들을 확인할 수 있다.</p>
+
+<blockquote>
+  <p>🔗 <a href="https://github.com/lencx/ChatGPT/releases">https://github.com/lencx/ChatGPT/releases</a></p>
+</blockquote>
+
+<p align="center"><img src="/assets/img/blog/20250331/fig_2.png" /></p>
+
+<p>여기서 Ubuntu 시스템에서 설치하기 위해 <mark>ChatGPT_1.1.0_linux_x86_64.deb</mark> 파일을 다운로드한다.&lt;/br&gt;
+다운로드한 .deb 패키지 파일을 마우스 오른쪽 버튼으로 클릭하고, 다른 응용 프로그램으로 열기 옵션에서 <strong>소프트웨어 설치 옵션</strong>을 선택한다.&lt;/br&gt;
+소프트웨어 설치 페이지가 나타나면 설치 버튼을 눌러 설치를 진행하고, 설치가 완료되면 Desktop Application이 설치된 것을 확인할 수 있다.</p>
+
+<h3 id="2-claude-desktop-application">2. Claude Desktop Application</h3>
+<h4 id="21-installation-via-deb-package">2.1. Installation via .deb Package</h4>
+<p>Linux에서 Claude Desktop을 네이티브로 실행하기 위한 작업<a href="https://github.com/k3d3/claude-desktop-linux-flake">(k3d3/claude-desktop-linux-flake)</a>에서 파생된 GitHub Repository에서 제공해주는 Build Script를 통해 설치를 진행하는 방법을 소개한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/aaddrick/claude-desktop-debian.git
+</code></pre></div></div>
+
+<p>패키지를 빌드하기 전에 <mark>Node.js &gt;= 12.0.0 and npm</mark> 버전이 요구되기 때문에 버전 업데이트를 진행해준다.
+아래는 이미 설치된 버전이 요구하는 버전을 만족하는지 확인하는 방법부터 소개한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check whether the installed Node.js and npm versions meet the minimum requirement</span>
+<span class="nv">$ </span>node <span class="nt">-v</span>
+v10.19.0
+<span class="nv">$ </span>npm <span class="nt">-v</span>
+6.14.4
+
+<span class="c"># If your versions are too old, install the latest Node.js LTS version.</span>
+<span class="c"># npm will be installed automatically along with Node.js.</span>
+<span class="nv">$ </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_18.x | <span class="nb">sudo</span> <span class="nt">-E</span> bash -
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> nodejs
+
+<span class="nv">$ </span>node <span class="nt">-v</span>
+v18.19.0
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>claude-desktop-debian
+
+<span class="c"># Run the build script to generate a Debian package</span>
+<span class="nv">$ </span><span class="nb">sudo</span> ./build-deb.sh
+
+✓ Package built successfully at: /home/user/claude-desktop-debian/build/claude-desktop_0.9.0_amd64.deb
+🎉 Done! You can now <span class="nb">install </span>the package with: <span class="nb">sudo </span>dpkg <span class="nt">-i</span> /home/user/claude-desktop-debian/build/claude-desktop_0.9.0_amd64.deb
+
+<span class="c"># Replace ${VERSION} with the version printed by the build script</span>
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> ./build/claude-desktop_<span class="k">${</span><span class="nv">VERSION</span><span class="k">}</span>_amd64.deb
+
+<span class="nv">$ </span><span class="nb">sudo </span>dpkg <span class="nt">-i</span> ./build/claude-desktop_0.9.0_amd64.deb
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>claude-desktop
+</code></pre></div></div>
+
+<ul>
+  <li>실행 결과</li>
+</ul>
+<p align="center"><img src="/assets/img/blog/20250331/fig_3.png" /></p>
+
+<p>이 Desktop Application에서는 최근 AI 트렌드에서 주목받고 있는 키워드 중 하나인 Claude의 <strong>MCP (Model Context Protocol</strong>)도 지원한다.&lt;/br&gt;
+MCP의 구성 파일은 <mark>~/.config/Claude/claude_desktop_config.json</mark> 경로에 위치하고 있다. (<strong>MCP</strong>에 대해서는 곧 자세히 다뤄볼 예정이다.)</p>
+
+<h3 id="3-coming-up-next">3. Coming up next…</h3>
+<p>앞서 소개한 ChatGPT와 Claude의 Desktop Application은 웹 서버를 통해 동작하기 때문에 인터넷 연결이 필수적이다.&lt;/br&gt;
+다음 글에서는 <strong>DeepSeek, Llama, Phi, Mistral, Gemma 등</strong>과 같은 <strong>오픈소스 LLM</strong>을 로컬 머신에 설치하고, 인터넷 연결 없이 사용할 수 있는 방법에 대해서 알아보도록 하자.</p>
+
+<hr />
+
+						</div>
+
+						<div class="post-text-bottom">	
+							
+							
+							<div class="tags-links">
+								<span>Tags:</span>
+								
+								<a href="/tags/llm" rel="tag">LLM</a>
+								
+								<a href="/tags/linux" rel="tag">Linux</a>
+								
+								<a href="/tags/chatgpt" rel="tag">ChatGPT</a>
+								
+								<a href="/tags/claude" rel="tag">Claude</a>
+								
+							</div>
+							
+						</div>
+
+						
+						<div class="post-navigation" role="navigation">
+							
+							<div class="nav-previous">
+								<a href="/simulation/2025/02/23/isaaclab-tutorial-interacting-with-objects/" rel="prev" title="Isaac Lab Tutorial #2 - Create the Scene"><span class="post-nav-next post-nav-text">Prev</span></a>
+							</div>
+							
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			
+			<!-- title -->
+			<div class="title">Comments</div>
+			
+			<!-- comments -->
+			<div class="row border-line-v">
+				<div class="col col-m-12 col-t-12 col-d-12">
+					<div class="post-box">
+						<div class="col-md-12">
+							<div id="utterances"></div>
+							<script src="https://utteranc.es/client.js"
+									repo="iminolee/iminolee.github.io"
+									issue-term="pathname"
+									label="comment"
+									theme="github-light"
+									crossorigin="anonymous"
+									async>
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			
+		</div>
+
+	</div>
+</div>
+      </div>
+    </div><!-- Plugins -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<script src="/assets/js/imagesloaded.pkgd.js"></script>
+<script src="/assets/js/isotope.pkgd.js"></script>
+<script src="/assets/js/jquery.slimscroll.js"></script>
+<script src="/assets/js/owl.carousel.js"></script>
+<script src="/assets/js/typed.js"></script>
+<script src="/assets/js/rrssb.js"></script>
+<script src="/assets/js/simple-jekyll-search.js"></script>
+
+
+<!-- Google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?key="></script>
+
+
+<!-- Main -->
+<script src="/assets/js/scripts.js"></script></body>
+
+</html>
